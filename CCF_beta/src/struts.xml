@@ -139,7 +139,7 @@
 		
 		<!-- config club's action -->
 		<action name="addClub" class="addClubAction">
-			<result name="success" type="redirect">listClub</result>
+			<result name="success" type="redirectAction">listClub</result>
 		</action>
 		
 		<action name="listClub" class="listClubAction">
@@ -161,7 +161,7 @@
 		
 		<!-- config stev-admin action -->
 		<action name="addUser" class="addTestAccount">
-			<result name="success" type="redirect">listUser</result>
+			<result name="success" type="redirectAction">listUser</result>
 			<interceptor-ref name="stevAuthorityInterceptor" />
 		</action>
 		
