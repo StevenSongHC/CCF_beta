@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="com.ccf" extends="struts-default">
+		
+		<!-- config interceptor -->
+		<interceptors>
+			<interceptor name="loginInterceptor" class="com.ccf.interceptor.LoginInterceptor" />
+			<interceptor name="userInterceptor" class="com.ccf.interceptor.UserInterceptor" />
+			<interceptor name="stevInterceptor" class="com.ccf.interceptor.StevInterceptor" />
+			
+			<interceptor-stack name="loginAuthorityInterceptor">
+				<interceptor-ref name="loginInterceptor" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		
+			<interceptor-stack name="userIdentifyInterceptor">
+				<interceptor-ref name="loginInterceptor" />
+				<interceptor-ref name="userInterceptor" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+			
+			<interceptor-stack name="stevAuthorityInterceptor">
+				<interceptor-ref name="loginInterceptor" />
+				<interceptor-ref name="stevInterceptor" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		
+		</interceptors>
+		
+		<global-results>
+			<result name="denied" type="redirect">/operate_denied.jsp</result>
+		</global-results>
+		
+		<!-- config user's action -->
+		<action name="register" class="userRegisterAction">
+			<!-- 防止表单重复提交 -->
+			<result name="success" type="redirect">/register_success.jsp</result>	
+			<!-- <result name="success" type="redirect">/register_success</result> -->	
+			<result name="input">/register.jsp</result>
+		</action>
+		
+		<action name="listUser" class="listUserAction">	<!-- Already excluded from validation -->
+			<result name="success">/user_list.jsp</result>	<!-- 已在此页面关闭错误提示 -->
+			<result name="login">/login.jsp</result>
+			<interceptor-ref name="stevAuthorityInterceptor" />
+		</action>
+		
+		<!-- <action name="goUserIndex" class="goUserIndexAction">	note:加了redirect会变空
+			<result name="success">/user_index_test.jsp</result>
+		</action> -->
+		
+		<action name="homepage" class="goToHomepageAction">	
+			<result name="input">/login.jsp</result>
+			<result name="success">/personal_homepage.jsp</result>
+			<result name="visitor">/user_index_test.jsp</result>
+		</action>
+		
+		<action name="enterClub" class="enterClubAction">	
+			<result name="leader">${destination}</result>
+			<result name="member" type="redirect">${destination}</result>
+			<result name="killer" type="redirect">${destination}</result>
+			
+			
+			<result name="free" type="redirectAction">${destination}</result>
+			<result name="login" type="redirect">/login.jsp</result>
+		</action>
+		
+		<action name="profile" class="goToProfileAction">
+			<result name="success">/personal_homepage.jsp</result>
+			<result name="visitor">/user_index_test.jsp</result>
+		</action>
+		
+		<action name="setting" class="goToSettingPageAction">
+			<result name="success">/user_setting.jsp</result>
+			<result name="input">/login.jsp</result>
+		</action>
+		
+		<action name="update" class="updateUserProfileAction">
+			<result name="success">/user_index_test.jsp</result>
+		</action>
+		
+		<!-- User login action config -->
+		<action name="autologin" class="autoLoginAction">
+			<result name="success" type="redirect">/index.jsp</result>	<!-- auto-login succeed -->
+			<result name="input" type="redirect">/login.jsp</result>	<!-- no logged yet -->
+		</action>
+		
+		<action name="login" class="userLoginAction">
+			<result name="success">/index.jsp</result>
+			<!-- <result name="success" type="redirect">/index.jsp</result> -->	<!-- login succeed -->
+			<result name="input">/login.jsp</result>	<!-- wrong password -->
+		</action>
+		
+		<action name="logout" class="userLogoutAction">
+			<result name="success" type="redirect">/index.jsp</result>	
+		</action>
+				
+		<action name="invite" class="inviteJoin">
+			<result name="success" type="redirect">/join_request-sent.jsp</result>
+			<result name="reinvite" type="redirectAction">goClubIndex?club.cid=${cid}</result>
+			<result name="login" type="redirect">/login.jsp</result>
+			<result name="limited" type="redirectAction">goClubIndex?club.cid=${cid}</result>
+			<result name="sb" type="redirectAction">goClubIndex?club.cid=${cid}</result>
+			<result name="member" type="redirectAction">goClubIndex?club.cid=${cid}</result>
+			<result name="inviting" type="redirectAction">goClubIndex?club.cid=${cid}</result>
+		</action>
+		
+		<action name="acceptInvitation" class="acceptJoinClubInvitation">
+			<result name="success" type="redirect">/join_club_success.jsp</result>
+			<result name="login" type="redirect">/login.jsp</result>
+		</action>
+		
+		<action name="refuseInvitation" class="refuseJoinClubInvitation">
+			<result name="success" type="redirect">/refuse_club_invitation.jsp</result>
+			<result name="login" type="redirect">/login.jsp</result>
+		</action>
+				
+		<action name="join" class="joinClub">
+			<result name="success" type="redirect">/join_request-sent.jsp</result>
+			<result name="login" type="redirect">/login.jsp</result>
+			<result name="leader" type="redirectAction">goClubIndex?club.cid=${cid}</result>
+			<result name="member" type="redirectAction">goClubIndex?club.cid=${cid}</result>
+			<result name="applying" type="redirectAction">goClubIndex?club.cid=${cid}</result>
+		</action>
+		
+		<action name="responseJoinClubApply" class="replyJoinClub">
+			<result name="success" type="redirect">/application_approved.jsp</result>
+			<result name="login" type="redirect">/login.jsp</result>
+			<result name="null" type="redirect">/index.jsp</result>
+		</action>
+		
+		<action name="muteNotification" class="muteNotification">
+			<result name="success" type="redirect">/notification_muted.jsp</result>
+			<result name="error" type="redirect">/operate_denied.jsp</result>
+			<result name="login" type="redirect">/login.jsp</result>
+			<result name="error" type="redirect">/index.jsp</result>
+		</action>
+		
+		<!-- config club's action -->
+		<action name="addClub" class="addClubAction">
+			<result name="success" type="redirect">listClub</result>
+		</action>
+		
+		<action name="listClub" class="listClubAction">
+			<result name="success">/club_list.jsp</result>
+		</action>
+		
+		<action name="goClubIndex" class="goClubIndexAction">
+			<result name="success">/club_index_test.jsp</result>
+		</action>
+		
+		<action name="goClubProfile" class="goClubProfileAction">
+			<result name="success" type="redirect">/stev_club_setting.jsp</result>	<!-- !! -->
+		</action>
+		
+		<action name="updateClubProfile" class="updateClubProfileAction">
+			<result name="success">/club_index_test.jsp</result>
+			<interceptor-ref name="stevAuthorityInterceptor" />
+		</action>
+		
+		<!-- config stev-admin action -->
+		<action name="addUser" class="addTestAccount">
+			<result name="success" type="redirect">listUser</result>
+			<interceptor-ref name="stevAuthorityInterceptor" />
+		</action>
+		
+		<action name="viewClubMembers" class="memberList">
+			<result name="success">/stev_club_members.jsp</result>
+			<interceptor-ref name="stevAuthorityInterceptor" />
+		</action>
+
+		<!-- <action name="showClubCrew" class="crewList">
+			<result name="success" type="redirect">/stev_club_leader_list.jsp</result>
+		</action> -->
+		
+		<action name="changeClubCrew" class="personnelChanges">
+			<result name="success" type="redirect">viewClubMembers</result>
+			<interceptor-ref name="stevAuthorityInterceptor" />
+		</action>
+		
+		<action name="freemarker" class="testFreemarkerAction">
+			<result name="success">/${htmlPage}</result>
+		</action>
+		
+		<action name="freemarker-userlist" class="freemarkerUserListAction">
+			<result name="success" type="freemarker">/${htmlPage}</result>
+		</action>
+		
+		<action name="personelChange" class="personelChangeAction">
+			<result name="login">/login.jsp</result>
+			<result name="emptyOption">/personel_change.jsp</result>
+			<result name="success" type="redirect">homepage/myclub_${cid}</result>
+		</action>
+		
+	</package>
+	
+	
+	<package name="ajax" extends="json-default">
+		
+		<action name="ajaxLogin" class="ajaxLoginAction">
+			<result name="map" type="json">
+				<param name="root">data</param>
+			</result>
+		</action>
+		
+		<action name="ajaxNotification" class="ajaxCheckNotificationAction">
+			<result name="success" type="json">
+				<param name="root">notification</param>
+			</result>
+		</action>
+		
+		<action name="loadUserName" class="ajaxLoadUserNameAction">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		
+	</package>
+</struts>    

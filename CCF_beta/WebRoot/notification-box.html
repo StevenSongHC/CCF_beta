@@ -1,0 +1,20 @@
+<div id="notification">
+</div>
+<!-- only work with Ajax -->
+<script type="text/javascript">
+	$(document).ready(function() {
+		setInterval(function() {
+			$.ajax( {
+				type: "POST",
+				url: "ajaxNotification",
+				dataType: "json"
+			}).done(function(data) {
+				$("#notification").html(data);
+			}).fail(function() {
+				alert("FAIL");
+			}).error(function (XMLHttpRequest, textStatus, errorThrown) {
+				$("#notification").html(XMLHttpRequest.responseText);
+			});
+		},10000);
+	});
+</script>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="CCF_beta"
+  id="myeclipse.1365046352216"
+  context-root="/CCF_beta"
+  j2ee-spec="6.0"
+  archive="CCF_beta.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

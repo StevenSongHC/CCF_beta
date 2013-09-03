@@ -1,0 +1,13 @@
+#portrait {
+	border: 2px solid gray;
+	width: 75%;
+}
+#portrait img {
+	width: 100%;
+}
+#portrait .pic_link {
+	border: 1px thin black;
+	background-color: gray;
+	margin: 5px;
+	float: left;
+}

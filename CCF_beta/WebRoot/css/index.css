@@ -1,0 +1,102 @@
+h1 {
+	text-align: center;
+}
+
+
+#navi_user .title {
+	border: 3px solid black;
+	margin: 10px;
+	font-size: 25pt;
+	color: gray;
+}
+#navi_user a {
+	margin-left: 30px;
+	font-size: 10pt; 
+	color: gray;
+}
+
+
+#navi_club .title {
+	border: 3px solid black;
+	margin: 10px;
+	font-size: 25pt;
+	color: green;
+}
+#navi_club a {
+	margin-left: 30px;
+	font-size: 10pt; 
+	color: green;
+}
+
+#user {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	border: 3px thin gray;
+	background-color: #E5E5BB;
+	display: block;
+}
+#user a {
+	color: gray;
+	text-decoration: none; 
+}
+
+.invitation-item {
+	background-color: #E9E9E9;
+}
+.invitation-item a {
+	text-decoration: none;
+	color: #709B9B;
+	background-color: #C3C3C3;
+	font-size: 15pt;
+	border: 3px thin gray;
+}
+
+.invitation-reply-item {
+	background-color: #D7D72D;
+}
+.invitation-reply-item a {
+	text-decoration: none;
+	color: #436EC3;
+	background-color: #AFAF5A;
+	font-size: 15pt;
+	border: 3px thin gray;
+}
+
+.newbie-notice-item {
+	background-color: #AD4C37;
+}
+.newbie-notice-item a {
+	text-decoration: none;
+	color: #6F3E54;
+	background-color: #BF5856;
+	font-size: 15pt;
+	border: 3px thin gray;
+}
+
+.join-club-apply-item {
+	background-color: #AFD98E;
+}
+.join-club-apply-item a {
+	text-decoration: none;
+	background-color: white;
+	font-size: 15pt;
+	border: 3px thin gray;
+}
+.join-club-apply-item .approve {
+	color: #2A00FF; 
+}
+.join-club-apply-item .reject {
+	color: #00FFD5; 
+}
+
+.join-club-apply-reply-item {
+	background-color: #8FB3C9;
+}
+.join-club-apply-reply-item a {
+	text-decoration: none;
+	color: #FF2AFF;
+	background-color: #55D4FF;
+	font-size: 15pt;
+	border: 3px thin gray;
+}

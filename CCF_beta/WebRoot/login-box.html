@@ -1,0 +1,64 @@
+<div id="login-box" style="width:300px; height:100px; position:fixed; left:50%; top:50%; margin:-150px 0 0 -130px; background-color:gray; filter:alpha(opacity=80); opacity:0.8;">
+	<table id="login-box" style="margin-top:10px; border: 1px solid #000; padding: 7px 0 -10px 0;">
+		<tbody>
+			<tr>
+				<td><b>Account</b></td>
+				<td><input type="text" id="account"></td>
+			</tr>
+			<tr>
+				<td><b>Password</b></td>
+				<td><input type="password" id="password"></td>
+			</tr>
+			
+		</tbody>
+	</table>
+	<button id="confirm_login" onclick="login()">login</button>
+	<!-- Ajax Required -->
+	<script type="text/javascript">
+		$("#account").focus();
+	
+		$("#login-box").keypress(function(event) {
+			if (event.which == 13)
+				$("#confirm_login").click();
+		});
+		
+		function login() {
+			$.ajax( {
+				type: "POST",
+				url: "ajaxLogin",
+				data: { account: $("#account").val(), password: $("#password").val() },
+				dataType: "json"
+			}).done(function( json ) {
+				var data = eval("("+json+")");
+				switch ( data.status ) {
+					case 1 :
+						$("#user").html(data.msg);
+						$("#login-box").remove();
+						break;
+					case 2 :var flag = true;
+						$("#account").val(data.msg);
+						$("#password").val("");
+						$("#account").focus(function() {
+							if (flag) {
+								$("#account").val("");
+							}
+							flag = false;
+						});
+						break;
+					case 3 :
+						alert("Incorrect Password");
+						$("#account").val(data.msg);
+						$("#password").val("");
+						break;
+					case 0 :
+						alert(data.msg);
+						break;
+				}
+			}).fail(function() {
+				alert("FAIL");
+			}).error(function (XMLHttpRequest, textStatus, errorThrown) {
+				$("#ajax").html(XMLHttpRequest.responseText);
+			});
+		}
+	</script>
+</div>

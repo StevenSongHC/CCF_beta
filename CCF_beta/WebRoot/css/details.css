@@ -1,0 +1,274 @@
+
+body{
+	margin: 0;
+}
+
+#main {
+	font: 8pt Verdana,Tahoma,sans-serif;
+}
+
+#club_portrait {
+	border: 2px solid black;	
+}
+
+#club_portrait img {
+	width: 100%;
+	height: 100%;
+	display: block;
+}
+
+#activity {
+	max-width: 60%;
+	margin: auto;
+	border: 3px solid gray;
+}
+
+#sponsor {
+	position: absolute;
+	right: 0;
+	max-width: 23%;
+	/*要用响应式调整sponsor flag大小*/
+}
+
+#activity .publisher {
+	font: 10pt Verdana,Tahoma,sans-serif;
+	font-weight: bold;
+	border: 2px solid black;
+}
+
+#activity .about_author {
+
+}
+
+.desc_loc {	/*author_desc*/
+	margin-left: 150px;
+	max-width: 78%;
+}
+
+#activity .author_portrait {
+	width: 10%;
+	padding: 20px 2px 2px 40px;
+	float: left;
+	border: 2px solid white;
+}
+
+#activity .author_info {
+	/*background:url(images/author_default.png);*/
+	/*position: absolute;
+	top: 64em;*/
+	list-style:none;
+	font-style:italic;
+	clear: left;
+}
+
+#activity .author_description {
+	display: block;
+	border-right: 1px solid; 
+	border-left: 1px solid; 
+	overflow: hidden; 
+	padding: 5px;
+	background-color: gray;
+	border-color: gray;
+}
+
+#activity .author_description p {
+	font: 12pt Verdana,Tahoma,sans-serif;
+	font-weight: bold;
+	padding: 0 15px 0 15px;	/*p的框内加空隙 */
+}
+
+#activity .author_description span {
+	float: right;
+	margin: 25px 15px 0 0
+}
+
+#activity .content {
+	border: 2px solid gray;	/*Delete it when done*/
+	margin: 20px;
+}
+
+#activity .element_comment {
+	position: absolute;
+	top: -40px;
+	left: 0px;
+}
+
+/*之后的advanced css阶段一定要换掉*/
+#activity .element_comment .comment_box {
+	position: absolute;
+	top: -10px;
+	left: -295px;
+	width: 255px;
+	height: 100px;
+	border: 3px solid black;
+	background-color: yellow;
+}
+
+#activity .element_comment .content {
+	border: 1px solid gray;
+	width: 280px;
+	top: -21px;
+	left: -21px;
+}
+
+#activity .element_comment .content img {
+	max-width: 30%;
+	max-height: 30%;
+	float: left;
+}
+#activity .element_comment .content p {
+	font-size: 4px;
+}
+
+#element {
+	position: relative;
+	padding: 20px;
+}
+
+
+
+._center {
+	text-align: center;
+	font: 20pt Verdana,Tahoma,sans-serif;
+}
+._center img {
+	width: 100%;
+}
+
+._left {
+	margin: 1em 0 1em 2em;
+	text-align: left;
+	font: 20pt Verdana,Tahoma,sans-serif;
+}
+
+._right {
+	padding: 1em 2em 1em 0;
+	text-align: right;
+	font: 20pt Verdana,Tahoma,sans-serif;
+}
+
+.dia {
+	margin: 20px 10px 20px 70px;
+}
+
+
+.arrow { 
+	border-left:70px solid #FFF; 	/*箭头长,color-white*/
+	border-top:20px solid gray; 	/*箭头宽,color-yes*/
+	margin-top: 25px;	/*更改箭头Y坐标*/
+	margin-left: 0px;	/*更改箭头X坐标*/
+	position: absolute;
+	z-index: -1;
+	/*For IE6*/ 
+	_position: absolute; 
+	_z-index: -1; 
+} 
+
+
+.b1,.b2,.b3,.b4,.b5,.b6,.b7,.b8,.b9,.b10 { 
+	height: 1px; 
+	font-size: 1px; 
+	overflow: hidden; 
+	display: block;
+}
+
+.b1 {margin: 0 8.75px;}
+.b2 {margin: 0 6.5px; border-right: 2px solid; border-left: 2px solid;}
+.b3 {margin: 0 5px; border-right: 1px solid; border-left: 1px solid;}
+.b4 {margin: 0 4px; border-right: 1px solid; border-left: 1px solid;}
+.b5 {margin: 0 3px; border-right: 1px solid; border-left: 1px solid;}
+.b6 {margin: 0 2px; border-right: 1px solid; border-left: 1px solid;}
+.b7 {margin: 0 1px; border-right: 1px solid; border-left: 1px solid;}
+.b8 {margin: 0 0.95px;border-right: 1px solid; border-left: 1px solid;}
+.b9 {margin: 0 0.5px; border-right: 1px solid; border-left: 1px solid;}
+.b10 {margin: 0 0.25px; border-right:1px solid; border-left: 1px solid; height: 3px;}
+
+
+ /*全部边框*/
+.desc_act .b1,.desc_act .b2,.desc_act .b3,.desc_act .b4,.desc_act .b5,
+.desc_act .b6,.desc_act .b7,.desc_act .b8,.desc_act .b9,.desc_act .b10 {
+	background: gray; 
+	border-color: gray;
+}
+
+#activity .comment {
+	margin-top: 10px;
+}
+#activity .comment p {
+	font: 5pt Verdana,Tahoma,sans-serif;
+	color: gray;
+}
+.comment_box {
+	width: 90%;
+	margin: 10px;
+	padding-left: 3%;
+}
+.comment_box .b1,.comment_box .b2,.comment_box .b3,.comment_box .b4,.comment_box .b5,
+.comment_box .b6,.comment_box .b7,.comment_box .b8,.comment_box .b9,.comment_box .b10 {
+	background: #E5E5BB; 
+	border-color: #E5E5BB;
+}
+.comment_leaver {
+	/*max-width: 10px;
+	max-height: 10px;*/
+	margin-right: 10px;
+	float: left;
+}
+.comment_content {
+	display: block;
+	border-right: 1px solid; 
+	border-left: 1px solid; 
+	overflow: hidden; 
+	padding: 0 1em 0 1em;
+	background-color: #E5E5BB;
+	border-color: #E5E5BB;
+}
+
+.comment_scroll {
+	margin: 2px;
+	text-align: center;
+}
+
+.comment_scroll a {
+	text-align: center;
+	position: absolute;
+}
+
+/*有数据->#878787,无数据->#D2D2D2*/
+#comment_page .page_previous {
+	width: 30%;
+	color: #D2D2D2;	/*默认无数据,color值为#D2D2D2*/
+}
+#comment_page .page_next {
+	width: 30%;
+	color: #878787;	/*默认有数据,color值为#878787*/
+	float: right;
+}
+#comment_page {
+	max-width: 50%;
+	margin: auto;
+	background-color: #ABAB80;
+}/*还是用img吧*/
+
+#activity #navi_page {
+	border: 1px solid gray;
+	height: 42px;
+}
+#activity #navi_page .page_previous {
+	float: left;
+}
+#activity #navi_page .page_quick {
+	float: left;
+	margin: 8px 4px 7px 4px;
+}
+#activity #navi_page .page_next {
+	float: right;
+}
+#activity #navi_page a {
+	display: block;
+	float: left;
+}
+
+a img {
+	border: none;
+}

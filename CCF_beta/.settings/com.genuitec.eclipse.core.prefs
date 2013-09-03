@@ -1,0 +1,3 @@
+eclipse.preferences.version=1
+validator.Checked=WebRoot/demo.html,src/struts.xml
+validator.Unchecked=

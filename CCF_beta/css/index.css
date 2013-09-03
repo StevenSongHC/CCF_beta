@@ -1,0 +1,42 @@
+h1 {
+	text-align: center;
+}
+
+
+#navi_user .title {
+	border: 3px solid black;
+	margin: 10px;
+	font-size: 25pt;
+	color: gray;
+}
+#navi_user a {
+	margin-left: 30px;
+	font-size: 10pt; 
+	color: gray;
+}
+
+
+#navi_club .title {
+	border: 3px solid black;
+	margin: 10px;
+	font-size: 25pt;
+	color: green;
+}
+#navi_club a {
+	margin-left: 30px;
+	font-size: 10pt; 
+	color: green;
+}
+
+#user {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	border: 3px thin gray;
+	background-color: #E5E5BB;
+	display: block;
+}
+#user a {
+	color: gray;
+	text-decoration: none; 
+}

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.ccf.bean.Club" table="club" catalog="beta">
+        <id name="cid" type="integer">
+            <column name="cid" />
+            <generator class="increment" />
+        </id>
+        <property name="c_name" type="string">
+            <column name="c_name" length="30" not-null="true" />
+        </property>
+        <property name="c_pic" type="string">
+            <column name="c_pic" length="200" not-null="true" />
+        </property>
+        <property name="c_homepage" type="string">
+            <column name="c_homepage" length="200" not-null="true" />
+        </property>
+        <property name="c_members" type="string">
+            <column name="c_members" length="250" />
+        </property>
+        <property name="c_code_current_leader" type="string">
+            <column name="c_code_current_leader" length="7" />
+        </property>
+        <property name="c_code_edit_authority_members" type="string">
+            <column name="c_code_edit_authority_members" length="45" />
+        </property>
+        <property name="c_intro" type="string">
+            <column name="c_intro" length="65535" />
+        </property>
+        <property name="c_activities" type="string">
+            <column name="c_activities" length="65535" />
+        </property>
+        <property name="c_shared_files" type="string">
+            <column name="c_shared_files" length="65535" />
+        </property>
+        <property name="c_xp" type="integer">
+            <column name="c_xp" length="6" />
+        </property>
+        <property name="c_province" type="integer">
+            <column name="c_province" length="3" not-null="true" />
+        </property>
+        <property name="c_city" type="integer">
+            <column name="c_city" length="4" not-null="true" />
+        </property>
+        <property name="c_college" type="string">
+            <column name="c_college" length="4" not-null="true" />
+        </property>
+        <property name="c_field" type="string">
+            <column name="c_field" length="100" />
+        </property>
+    </class>
+    
+</hibernate-mapping>
