@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>CCF stage v2</title>
+	<link rel="stylesheet" type="text/css" href="stage-v2.css">
+</head>
+<body>
+	<script src="jquery-1.9.1.js"></script>
+	<script>
+		$(document).ready(function() {
+			var i = 0;
+			$("#create").click(function() {
+				if (i%2 == 0) {
+					$("#stage").finish().slideDown("fast");
+					$("#create").text("fold");
+				}
+				else {
+					$("#stage").finish().slideUp("slow");
+					$("#create").text("open");
+				}
+				i++;
+			});
+
+			/* adaptable input box */
+			$("#input_summary").keydown(function(event) {
+				$("#summary").css("height", $("#input_summary").height()+28);
+				$("#info").css("height", $("#summary").height()+28);
+			});
+			$("#input_content").keydown(function(event) {
+				$("#edit").css("height", $("#input_content").height()+28);
+			});
+			/* resize input_summary */
+
+			$("#workbench").css("cursor", "text").click(function() {
+				$("#workbench #edit").show();
+				$("#workbench #edit #input_content").focus();
+			});
+		});
+	</script>
+
+<hr>
+<button id="create" class="btn wild">open</button>
+<div id="stage">
+	<!-- the mark of storage-->
+	
+		<div id="info">
+			<div id="portrait"><img src="author_default.png"/></div>
+			<div id="summary">
+				<div id="input_summary" contenteditable="true"></div>
+			</div>
+		</div>
+	<!-- the end of it -->
+		<div id="workbench">
+			<!-- the mark of storage-->
+			<div id="showcase"></div>
+			<!-- the end of it -->
+			<div id="edit">
+				<div id="input_content"  contenteditable="true"></div>
+				<div id="function_bar">
+					<span class="upload_img"><img src="upload_img.png"></span>
+					<span class="upload_vid"><img src="upload_vid.png"></span>
+					<span class="font_size">size</span>
+					<span class="font_color">color</span>
+				</div>
+			</div>
+			<div class="editable_area_default_newline"></div>
+		</div>
+
+		<div id="final">
+			<span class="pre_upload_vid"><img src="upload_vid.png"></span>
+			<span class="_btn_publish">publish</span><span class="_btn_save">save</span>
+		</div>
+	
+</div>
+</body>
+</html>

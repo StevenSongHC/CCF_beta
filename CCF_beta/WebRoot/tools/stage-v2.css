@@ -1,0 +1,174 @@
+.btn {
+	background-color: #E1E1E1;
+	padding: 1px;
+}
+.wild {
+	width: 55%;
+	/* fuck ie6 */
+	_width: 720px;
+}
+
+#create {
+	display: block;
+	margin: auto;
+	min-width: 350px;
+}
+
+#stage {
+	width: 55%;
+	min-width: 350px;
+	/* fuck ie6*/
+	_width: 720px;
+	height: 375px;
+	background-color: #FDFDD2;
+	margin: auto;
+	/*display: none;*/
+}
+
+#info {
+	padding-top: 2%;
+	width: 95%;
+	height: 130px;
+	margin: auto;
+	clear: both;
+}
+#portrait {
+	float: left;
+}
+#portrait img {
+	width: 50px;
+	height: 50px;
+	/* ie6 hack */
+	margin-top: 25%;
+	_margin-top: 10px;
+}
+#summary {
+	width: 65%;
+	height: 4em;
+	background-color: #FBE491;
+	float: left;
+	margin: 5%;
+	margin-top: 0px;
+	font-size: 14pt;
+	padding: 2%;
+}
+#input_summary {
+	width: 80%;
+	min-height: 3em;
+	_height: 3em;
+	background-color: #F9E9AD;
+	margin: auto;
+	margin-top: 10px;
+	word-wrap: break-word;
+}
+
+#workbench {
+	width: 75%;
+	height: 170px;
+	margin: auto;
+	background-color: #FBFDE3;
+}
+#workbench #edit {
+	height: 3em;
+	background-color: red;
+	padding-top: 1em;
+	cursor: default;
+	/*display: none;*/
+}
+#workbench #edit #input_content {
+	width: 90%;
+	margin: auto;
+	background-color: #D0D2CC;
+	margin-left: auto; 
+    margin-right: auto;
+    word-wrap: break-word;
+    overflow-x: hidden;
+    overflow-y: auto;
+    cursor: auto;
+}
+#workbench #edit #function_bar {
+	width: 100%;
+	height: 17px;
+	background-color: yellow;
+	margin-top: 9px;
+}
+#workbench #edit #function_bar .font_size {
+	width: 45px;
+	height: 100%;
+	margin-right: 15px;
+	background-color: gray;
+	float: right;
+}
+#workbench #edit #function_bar .font_color {
+	width: 45px;
+	height: 100%;
+	margin-right: 15px;
+	background-color: gray;
+	float: right;
+}
+#workbench #edit #function_bar .upload_img {
+	margin-left: 15px;
+}
+#workbench #edit #function_bar .upload_vid {
+	margin-left: 15px;
+}
+
+.editable_area_default_newline {
+	width: 100%;
+	height: 45px;
+	margin-top: 1em;
+	background-color: #D4DCDA;
+	border-style: dashed;
+	border-width: 1px;
+	border-color: black;
+}
+
+#final {
+	width: 100%;
+	height: 30px;
+	margin-top: 23px;
+}
+#final .pre_upload_vid {
+	margin-left: 24px;
+}
+#final ._btn_save {
+	width: 100px;
+	height: 27px;
+	font-size: 15pt;
+	background-color: #E5CAC7;
+	cursor: default;
+	float: right;
+	text-align: center;
+	margin: 1px 6px 0 0;
+}
+#final ._btn_save:hover,#final ._btn_save.hover {
+	background-color: #F6EBEA;
+}
+#final ._btn_publish {
+	width: 87px;
+	height: 20px;
+	background-color: #98C9DE;
+	cursor: default;
+	float: right;
+	text-align: center;
+	margin: 4px 13px 0 6px;
+}
+#final ._btn_publish:hover,#final ._btn_publish.hover {
+	background-color: #D1E7F1;
+}
+
+.test_box {
+    width: 400px; 
+    min-height: 120px; 
+    max-height: 300px;
+    _height: 120px; 
+    margin-left: auto; 
+    margin-right: auto; 
+    padding: 3px; 
+    outline: 0; 
+    border: 1px solid #a0b3d6; 
+    font-size: 12px; 
+    word-wrap: break-word;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
