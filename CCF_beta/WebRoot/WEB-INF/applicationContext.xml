@@ -210,7 +210,8 @@
 	</bean>
 	
 	<bean id="personelChangeAction" class="com.ccf.action.user.PersonelChangeAction" scope="prototype">
-		<property name="service" ref="userService" />
+		<property name="userService" ref="userService" />
+		<property name="clubService" ref="clubService" />
 	</bean>
 	
 </beans>

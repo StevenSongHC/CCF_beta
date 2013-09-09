@@ -6,11 +6,13 @@ import java.util.Map;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.transform.Transformers;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.ccf.bean.Club;
 import com.ccf.dao.ClubDAO;
+import com.ccf.util.FormatTransformer;
 
 public class ClubDAOImpl extends HibernateDaoSupport implements ClubDAO {
 
@@ -99,6 +101,78 @@ public class ClubDAOImpl extends HibernateDaoSupport implements ClubDAO {
 			info.put("tag", map.get("c_field").toString());
 		}
 		return info;
+	}
+	
+	public int[] clubMemberUidArray(int cid) {
+		String sql = "SELECT c_members FROM club WHERE cid=" + cid;
+		return new FormatTransformer().transformString2IntegerArray(executeSql(sql).toString(), ",");
+	}
+	
+	public int[] clubPublishUidArray(int cid) {
+		String sql = "SELECT c_code_edit_authority_members FROM club WHERE cid=" + cid;
+		return new FormatTransformer().transformString2IntegerArray(executeSql(sql).toString(), ",");
+	}
+
+	public String clubMemberUidString(int cid) {
+		return executeSql("SELECT c_members FROM club WHERE cid=" + cid).toString();
+	}
+	
+	public String clubPublisherUidString(int cid) {
+		return executeSql("SELECT c_code_edit_authority_members FROM club WHERE cid=" + cid).toString();
+	}
+	
+	public boolean updateCMembers(int cid, String newCMembers) {
+		System.out.println("newCMembers:" + newCMembers);
+		// try hibernate transaction stuff
+		String sql = null;
+		Session session = this.getHibernateTemplate().getSessionFactory().openSession();
+		Transaction tx = session.beginTransaction();
+		try {
+			sql = "UPDATE club SET c_members='" + newCMembers + "' WHERE cid=" + cid;
+			session.createSQLQuery(sql).executeUpdate();
+			// session.flush();		default
+			tx.commit();
+			// session.disconnect();
+		} catch(RuntimeException e) {
+			tx.rollback();
+			e.printStackTrace();
+			return false;
+		}
+		finally {
+			session.close();
+		}
+		return true;
+	}
+	
+	public boolean updateCCodeEditAuthorityMembers(int cid, String newCCodeEditAuthorityMembers) {
+		System.out.println("newCMembers:" + newCCodeEditAuthorityMembers);
+		String sql = null;
+		Session session = this.getHibernateTemplate().getSessionFactory().openSession();
+		Transaction tx = session.beginTransaction();
+		try {
+			sql = "UPDATE club SET c_code_edit_authority_members='" + 
+					newCCodeEditAuthorityMembers + "' WHERE cid=" + cid;
+			session.createSQLQuery(sql).executeUpdate();
+			tx.commit();
+		} catch(RuntimeException e) {
+			tx.rollback();
+			e.printStackTrace();
+			return false;
+		}
+		finally {
+			session.close();
+		}
+		return true;
+	}
+	
+	public boolean deleteMember(int cid, int uid) {
+		// TODO
+		return false;
+	}
+
+	public boolean deletePublisher(int cid, int uid) {
+		// TODO
+		return false;
 	}
 	
 }

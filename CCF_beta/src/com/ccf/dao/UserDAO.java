@@ -31,6 +31,14 @@ public interface UserDAO {
 	
 	public List<User> findUserSetByCodes(String[] codes);
 	
+	public int[] getUserClubArray(int uid);
+	
+	public int[] getUserClubJobArray(int uid);
+	
+	public int getJobCode(String newJob);
+	
+	public boolean updateUserClubLevel(int uid, int[] newJobArray);
+	
 	public void updateUserBasicProfile(User user);
 	
 	public User login(String account, String password);

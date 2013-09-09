@@ -37,5 +37,37 @@ public class ClubServiceImpl implements ClubService {
 	public Map<String, Object> clubLeaderDetails(int cid) {
 		return this.clubDao.clubDetails(cid);
 	}
+	
+	public void addMember(int cid, int uid) {
+		// TODO Auto-generated method stub
+			
+	}
+	
+	public void removeMember(int cid, int uid) {
+		StringBuilder builder = new StringBuilder();
+		for (int locatedUid : clubDao.clubMemberUidArray(cid)) {
+			if (uid != locatedUid)
+				builder.append(locatedUid + ",");
+		}
+		clubDao.updateCMembers(cid, builder.toString());
+	}
 
+
+	@Override
+	public void addPublisher(int cid, int uid) {
+		clubDao.updateCCodeEditAuthorityMembers(cid, clubDao.clubPublisherUidString(cid) + uid + ",");
+	}
+
+	@Override
+	public void removePublisher(int cid, int uid) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean updateLeader(int cid, int oldLeaderUid, int newLeaderUid) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
 }

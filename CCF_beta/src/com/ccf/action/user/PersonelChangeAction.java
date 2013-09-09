@@ -1,5 +1,6 @@
 package com.ccf.action.user;
 
+import com.ccf.service.ClubService;
 import com.ccf.service.UserService;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -12,8 +13,10 @@ public class PersonelChangeAction extends ActionSupport {
 	
 	private int cid;
 	private String account;
-	private String job;
-	private UserService service;
+	private String oldJob;
+	private String newJob;
+	private UserService userService;
+	private ClubService clubService;
 	public int getCid() {
 		return cid;
 	}
@@ -26,27 +29,59 @@ public class PersonelChangeAction extends ActionSupport {
 	public void setAccount(String account) {
 		this.account = account;
 	}
-	public String getJob() {
-		return job;
+	public String getOldJob() {
+		return oldJob;
 	}
-	public void setJob(String job) {
-		this.job = job;
+	public void setOldJob(String oldJob) {
+		this.oldJob = oldJob;
 	}
-	public UserService getService() {
-		return service;
+	public String getNewJob() {
+		return newJob;
 	}
-	public void setService(UserService service) {
-		this.service = service;
+	public void setNewJob(String newJob) {
+		this.newJob = newJob;
+	}
+	public UserService getUserService() {
+		return userService;
+	}
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+	public ClubService getClubService() {
+		return clubService;
+	}
+	public void setClubService(ClubService clubService) {
+		this.clubService = clubService;
 	}
 	@Override
 	public String execute() throws Exception {
-		if (!this.service.verifyLeader(cid, this.service.getCurrentUser().getUid()))
+		if (!this.userService.verifyLeader(cid, this.userService.getCurrentUser().getUid()))
 			return LOGIN;
 		
-		if (job == null)
-			return "emptyOption";
+		System.out.println("-------------------- cid:" + cid + " account:" + account + " oldJob:" + oldJob + " newJob:" + newJob + " -------------------- ");
 		
-		System.out.println("cid:" + cid + " account:" + account + " job:" + job);
+		if (oldJob == null || newJob == null) {
+			System.out.println("emptyShit");
+			return "emptyShit";
+		}
+		
+		int staffUid = userService.findUserByAccount(account).getUid();		// make it simple when refactor, like, "getUidByAccount()"
+		// member -> publisher
+		if (oldJob.equals("member") && newJob.equals("publisher")) {
+			System.out.println("=====  member -> publisher  =====");
+			// removed from member data first, then added to publisher data
+			clubService.removeMember(cid, staffUid);		
+			clubService.addPublisher(cid, staffUid);
+			userService.updateUserClubJob(cid, staffUid, "publisher");
+		}
+		
+		// publisher -> member
+		if (oldJob.equals("publisher") && newJob.equals("member")) {
+			System.out.println("=====  publisher -> member  =====");
+			// removed from publisher data first, then added to member data
+			clubService.removePublisher(cid, staffUid);
+			clubService.addMember(cid, staffUid);
+		}
 		
 		return SUCCESS;
 	}

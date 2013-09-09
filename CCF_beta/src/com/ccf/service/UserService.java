@@ -17,7 +17,7 @@ public interface UserService {
 	
 	public List<User> fetchUsersList();
 	
-	public User findUser(int uid);	//用来通过uid快速找到user用
+	public User findUser(int uid);	//鐢ㄦ潵閫氳繃uid蹇�鎵惧埌user鐢�
 	
 	public User findUserByAccount(String account);
 	
@@ -67,4 +67,6 @@ public interface UserService {
 	public void muteNewbieNoticeInNotification(int senderUid, int receiverUid, int cid);
 	
 	public void muteJoinClubApplyNoticeInNotification(int senderUid, int receiverUid, int cid);
+	
+	public void updateUserClubJob(int cid, int uid, String newJob);
 }

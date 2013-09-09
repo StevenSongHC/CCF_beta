@@ -189,7 +189,7 @@
 		
 		<action name="personelChange" class="personelChangeAction">
 			<result name="login">/login.jsp</result>
-			<result name="emptyOption">/personel_change.jsp</result>
+			<result name="emptyShit">/personel_change.jsp</result>
 			<result name="success" type="redirect">homepage/myclub_${cid}</result>
 		</action>
 		

@@ -9,6 +9,7 @@ import java.util.Map;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.transform.Transformers;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
@@ -69,7 +70,7 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 	public void registerUser(User user) {
 		this.getHibernateTemplate().save(user);
 		int uid = Integer.parseInt(executeSql("select count(*) from user").toString());
-		//创建一个新用户时同时新建notification 表一个新记录
+		//鍒涘缓涓�釜鏂扮敤鎴锋椂鍚屾椂鏂板缓notification 琛ㄤ竴涓柊璁板綍
 		String sql = "insert into notification(uid,notice,invitation,invitation_reply,join_club_apply," +
 				"join_club_apply_reply,newbie,message,new_subscription_amount,subscription,comment,file) values (" + 
 				uid + ",0,0,0,0,0,0,0,0,'',0,0)";
@@ -129,6 +130,37 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 		return users;
 	}
 
+	public int[] getUserClubArray(int uid) {
+		return format.transformString2IntegerArray(executeSql("SELECT u_clubs FROM user WHERE uid=" + uid).toString(), ",");
+	}
+	
+	public int[] getUserClubJobArray(int uid) {
+		return format.transformString2IntegerArray(executeSql("SELECT u_clubs_level FROM user WHERE uid=" + uid).toString(), ",");
+	}
+	
+	public int getJobCode(String joName) {
+		return Integer.parseInt(executeSql("SELECT joid FROM job WHERE jo_name='" + joName + "'").toString());
+	}
+	
+	public boolean updateUserClubLevel(int uid, int [] newJobArray) {
+		String sql = null;
+		Session session = this.getHibernateTemplate().getSessionFactory().openSession();
+		Transaction tx = session.beginTransaction();
+		try {
+			sql = "UPDATE user SET u_clubs_level='" + 
+					format.transformIntegerArray2String(newJobArray, ",") + "' WHERE uid=" + uid;
+			session.createSQLQuery(sql).executeUpdate();
+			tx.commit();
+		} catch(RuntimeException e) {
+			tx.rollback();
+			e.printStackTrace();
+			return false;
+		}
+		finally {
+			session.close();
+		}
+		return true;
+	}
 	
 	@SuppressWarnings("null")
 	public List<User> findUserSetByCodes(String[] codes) {
@@ -154,7 +186,7 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 		query.executeUpdate();  
 		session.getTransaction().commit();
 		
-		/*this.getHibernateTemplate().update(user);*/	//更新数据库所有数据时才用Only for data resetting using
+		/*this.getHibernateTemplate().update(user);*/	//鏇存柊鏁版嵁搴撴墍鏈夋暟鎹椂鎵嶇敤Only for data resetting using
 	}
 	
 	//Validate by checking account and password first,then return user's data
@@ -218,7 +250,7 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 		return list;
 	}
 	
-	public boolean verifyLeader(int cid, int uid) {		//只使用这两个判断并不安全，之后要使用User对象判断 use User class to verify
+	public boolean verifyLeader(int cid, int uid) {		//鍙娇鐢ㄨ繖涓や釜鍒ゆ柇骞朵笉瀹夊叏锛屼箣鍚庤浣跨敤User瀵硅薄鍒ゆ柇 use User class to verify
 		Session session = this.getHibernateTemplate().getSessionFactory().openSession();  
 		session.beginTransaction();
 		String hql = "select club.c_code_current_leader from Club club where club.cid=" + cid;	//change leader to int
@@ -229,7 +261,7 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 		System.out.println("the leader of club " + cid + " is " + (String) query.uniqueResult());
 		
 		int leader = Integer.parseInt((String) query.uniqueResult());
-		if (uid != leader) //检测到权限不是leader verify failed
+		if (uid != leader) //妫�祴鍒版潈闄愪笉鏄痩eader verify failed
 			return false;
 		System.out.println(uid + " is leader of " + cid);
 		return true;
@@ -341,18 +373,18 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 	
 	// this is just a join request sent by a user, needs leader's permission
 	public void joinClub(int uid, int cid) {
-		//申请的时间 date of apply
+		//鐢宠鐨勬椂闂�date of apply
 		Date now = new Date();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 		String date = dateFormat.format(now);
 		System.out.println("Date:" + date);
 		
-		//吧该条记录保存入join_club_apply table中，说明有人想加入club, status=0 means leader not read
+		//鍚ц鏉¤褰曚繚瀛樺叆join_club_apply table涓紝璇存槑鏈変汉鎯冲姞鍏lub, status=0 means leader not read
 		String sql = "INSERT INTO join_club_apply(cid,leader_uid,applicant_uid,date,status) VALUES (" + 
 						cid + ",(SELECT c_code_current_leader FROM club WHERE cid=" + cid + ")," + uid + 
 						",'" + date + "',0)";
 		runSql(sql);
-		// 在该club's leader的notification 表为join_club_apply记录plus one
+		// 鍦ㄨclub's leader鐨刵otification 琛ㄤ负join_club_apply璁板綍plus one
 		sql = "update notification set join_club_apply=join_club_apply+1 where uid=" +
 				"(select c_code_current_leader from club where cid=" + cid + ")";
 		runSql(sql);
@@ -499,7 +531,7 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 					int[] newbies = format.transformString2IntegerArray(map.get("newbie_uid").toString(), ",");
 					String[] date = map.get("date").toString().split(",");
 					for (int i=0; i<newbies.length; i++) {
-						// 请勿望文生义,而且别乱改这些较长的的sql
+						// 璇峰嬁鏈涙枃鐢熶箟,鑰屼笖鍒贡鏀硅繖浜涜緝闀跨殑鐨剆ql
 						sql = "select user.u_name as newbie,club.c_name as club,'" + date[i] + "' as newbieJoinDate," + 
 						cid + " as cid,newbie.uid as receiver,user.uid as sender from newbie" + 
 						" inner join user on user.uid=" + newbies[i] + 

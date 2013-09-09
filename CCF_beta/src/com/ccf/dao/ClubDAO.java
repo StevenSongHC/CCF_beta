@@ -23,4 +23,22 @@ public interface ClubDAO {
 	
 	public Map<String, Object> clubDetails(int cid);
 	
+	public int[] clubMemberUidArray(int cid);
+	
+	public int[] clubPublishUidArray(int cid);
+	
+	public String clubMemberUidString(int cid);
+	
+	public String clubPublisherUidString(int cid);
+	
+	// note: update - user.u_clubs no modify required
+	//		 delete - have to modify those data
+	public boolean updateCMembers(int cid, String newCMembers);
+	
+	public boolean updateCCodeEditAuthorityMembers(int cid, String CCodeEditAuthorityMembers);
+	
+	public boolean deleteMember(int cid, int uid);
+	
+	public boolean deletePublisher(int cid, int uid);
+	
 }

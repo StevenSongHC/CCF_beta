@@ -465,4 +465,16 @@ public class UserServiceImpl implements UserService {
 		this.userDao.muteJoinClubApplyNoticeInNotification(senderUid, receiverUid, cid);
 	}
 	
+	public void updateUserClubJob(int cid, int uid, String newJob) {
+		int index = 0;
+		int[] jobArray = userDao.getUserClubJobArray(uid);
+		for (int currentCid : userDao.getUserClubArray(uid)) {
+			if (cid == currentCid)
+				jobArray[index] = userDao.getJobCode(newJob);
+			else
+				index++;
+		}
+		userDao.updateUserClubLevel(uid, jobArray);
+	}
+	
 }

@@ -1,4 +1,6 @@
-<%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@taglib uri= "http://java.sun.com/jsp/jstl/core" prefix= "s" %>
+
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -15,11 +17,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
   <hr>
-    <a href="personelChange?cid=${cid}&account=${account}&job=publisher">PUBLISHER</a>
-    <br>
-    <a href="personelChange?cid=${cid}&account=${account}&job=leader">LEADER</a>
-    <br>
-    <a href="<%=basePath%>homepage/myclub_${cid}">cancel</a>
+  
+  	<s:if test="${oldJob=='member'}">
+	    <a href="personelChange?cid=${cid}&account=${account}&oldJob=${oldJob}&newJob=publisher">PUBLISHER</a>
+	    <br>
+	    <a href="personelChange?cid=${cid}&account=${account}&oldJob=${oldJob}&newJob=leader">LEADER</a>
+	    <br>
+	    <a href="<%=basePath%>homepage/myclub_${cid}">cancel</a>
+    </s:if>
+    
+    <s:if test="${oldJob=='publisher'}">
+    	<a href="personelChange?cid=${cid}&account=${account}&oldJob=${oldJob}&newJob=member">MEMBER</a>
+	    <br>
+	    <a href="personelChange?cid=${cid}&account=${account}&oldJob=${oldJob}&newJob=leader">LEADER</a>
+	    <br>
+	    <a href="<%=basePath%>homepage/myclub_${cid}">cancel</a>
+    </s:if>
+    
   <hr>
   </body>
 </html>
