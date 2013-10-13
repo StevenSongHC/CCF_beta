@@ -39,8 +39,8 @@ public class ClubServiceImpl implements ClubService {
 	}
 	
 	public void addMember(int cid, int uid) {
-		// TODO Auto-generated method stub
-			
+		System.out.println("addMember ====" + cid + ", " + uid);
+		clubDao.updateCMembers(cid, clubDao.clubMemberUidString(cid) + uid + ",");
 	}
 	
 	public void removeMember(int cid, int uid) {
@@ -60,8 +60,13 @@ public class ClubServiceImpl implements ClubService {
 
 	@Override
 	public void removePublisher(int cid, int uid) {
-		// TODO Auto-generated method stub
-		
+		StringBuilder builder = new StringBuilder();
+		for (int locatedUid : clubDao.clubPublisherUidArray(cid)) {
+			if (uid != locatedUid)
+				builder.append(locatedUid + ",");
+		}
+		System.out.println("new publisher array---" + builder.toString());
+		clubDao.updateCCodeEditAuthorityMembers(cid, builder.toString());
 	}
 
 	@Override

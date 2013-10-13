@@ -31,6 +31,7 @@
 			<list>
 				<value>User.hbm.xml</value>
 				<value>Club.hbm.xml</value>
+				<value>Province.hbm.xml</value>
 			</list>
 		</property>		
 		<property name="hibernateProperties">
@@ -67,6 +68,12 @@
 		</property>		
 	</bean>
 	
+	<bean id="provinceDao" class="com.ccf.dao.impl.ProvinceDAOImpl" scope="singleton">	<!-- 无状态，仅用于保存前面传过来的数据 -->	
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>		
+	</bean>
+	
 	<bean id="stevDao" class="com.ccf.dao.impl.StevDAOImpl" scope="singleton">	<!-- 无状态，仅用于保存前面传过来的数据 -->	
 		<property name="sessionFactory">
 			<ref bean="sessionFactory"/>
@@ -81,6 +88,10 @@
 	
 	<bean id="clubService" class="com.ccf.service.impl.ClubServiceImpl">
 		<property name="clubDao" ref="clubDao" />	
+	</bean>
+	
+	<bean id="provinceService" class="com.ccf.service.impl.ProvinceServiceImpl">
+		<property name="provinceDao" ref="provinceDao" />	
 	</bean>
 	
 	<bean id="stevService" class="com.ccf.service.impl.StevServiceImpl"> <!-- scope默认singleton -->	
@@ -162,6 +173,10 @@
 	<bean id="ajaxLoadUserNameAction" class="com.ccf.action.user.GetUserNameAjaxAction" scope="prototype">
 		<property name="service" ref="userService" />
 	</bean>
+	<bean id="ajaxSearchSuggestionAction" class="com.ccf.action.user.SearchSuggestionAction" scope="prototype">
+		<property name="userService" ref="userService" />
+		<property name="clubService" ref="clubService" />
+	</bean>
 	
 	<!-- ClubAction -->
 	<bean id="addClubAction" class="com.ccf.action.club.AddClubAction" scope="prototype">	
@@ -212,6 +227,14 @@
 	<bean id="personelChangeAction" class="com.ccf.action.user.PersonelChangeAction" scope="prototype">
 		<property name="userService" ref="userService" />
 		<property name="clubService" ref="clubService" />
+	</bean>
+	
+	<bean id="operateProvinceAction" class="com.ccf.action.province.ListProvinceAction" scope="prototype">
+		<property name="prService" ref="provinceService" />
+	</bean>
+	
+	<bean id="saveAndFetchLastProvinceAction" class="com.ccf.action.province.AddAndFetchLastDataAction" scope="prototype">
+		<property name="prService" ref="provinceService" />
 	</bean>
 	
 </beans>

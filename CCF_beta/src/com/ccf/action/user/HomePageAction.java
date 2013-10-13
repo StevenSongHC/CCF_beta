@@ -54,7 +54,7 @@ public class HomePageAction extends ActionSupport implements RequestAware {
 
 
 	@Override
-	public String execute() throws Exception {	//用来处理用户个人页面及信息的action处理，需验证是否为当前账户,verify user identify required
+	public String execute() throws Exception {	//ç”¨æ�¥å¤„ç�†ç”¨æˆ·ä¸ªäººé¡µé�¢å�Šä¿¡æ�¯çš„actionå¤„ç�†ï¼Œéœ€éªŒè¯�æ˜¯å�¦ä¸ºå½“å‰�è´¦æˆ·,verify user identify required
 		if (account == null) {	//default setting action without account paramount, self update
 			/*session = request.getSession(false);
 			if(session == null)

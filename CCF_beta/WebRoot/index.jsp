@@ -25,7 +25,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		$(document).ready(function() {
 			$("#ajaxTest").click(function() {
 				/* $("#ajax").load("login-box.html"); */
-				checkNotification();
+				/* checkNotification(); */
+				loadSearchBox();
 			});
 			$("#login").click(function() {
 				/* $("#ajax").load("login-box.html"); */
@@ -61,6 +62,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			});
 		}
 		
+		function loadSearchBox() {
+			$("#ajax").load("search-box.html");
+		}
 	</script>
 	
   </head>
@@ -153,8 +157,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    <s:a href="listClub">Show all clubs</s:a>
 		    </div>
     </div>
+    
+    <hr><hr>
+    Some Database Entities
+    <s:a href="operateProvince">Province(省份)</s:a>
 
-	
+	<hr>
     <% 
     Cookie cookies[]=request.getCookies();  
     if(cookies != null) {

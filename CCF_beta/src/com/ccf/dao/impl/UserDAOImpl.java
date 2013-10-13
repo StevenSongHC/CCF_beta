@@ -118,6 +118,16 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 		return user;
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<User> getUserListByNameLike(String username, int limit) {
+		Session session = this.getHibernateTemplate().getSessionFactory().openSession();  
+		session.beginTransaction();
+		Query query = session.createQuery("From User user where user.u_name like'%" + username + "%'");  
+		query.setMaxResults(limit);
+		session.getTransaction().commit();
+		return (List<User>) query.list();
+	}
+	
 	public int findUidByAccount(String account) {
 		return Integer.parseInt(executeSql("select uid from user where u_account='" + account + "'").toString());
 	}

@@ -76,11 +76,12 @@ public class PersonelChangeAction extends ActionSupport {
 		}
 		
 		// publisher -> member
-		if (oldJob.equals("publisher") && newJob.equals("member")) {
+		else if (oldJob.equals("publisher") && newJob.equals("member")) {
 			System.out.println("=====  publisher -> member  =====");
 			// removed from publisher data first, then added to member data
 			clubService.removePublisher(cid, staffUid);
 			clubService.addMember(cid, staffUid);
+			userService.updateUserClubJob(cid, staffUid, "member");
 		}
 		
 		return SUCCESS;

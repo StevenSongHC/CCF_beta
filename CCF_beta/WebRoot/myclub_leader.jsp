@@ -20,10 +20,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		$(document).ready(function() {
 			addUserNameItemHandler();
 			$("#link").css("background-color", "red");	// fail!
-			$(".link a").click(function(event) {
+			/* $(".link a").click(function(event) {
 				event.preventDefault();
 				alert("here");
-			});
+			}); */
 		});
 		
 		var isMemberListLoad = false;
@@ -89,7 +89,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<dl>
 			<dt id="publisher_list">Publisher(s)</dt>
 				<s:iterator value="%{#request.clubinfo.publisher}">
-					<dd><s:property value="username"/>(<s:property value="uid"/>)</dd>
+					<dd><div class="default"><span class="username"><s:property value="username"/></span><span class="link"><a href="profile?account=${useraccount}">H</a><a href="personelChange?cid=${clubinfo.cid}&account=${useraccount}&oldJob=publisher">C</a><a href="deleteStaff?cid=${clubinfo.cid}&account=${useraccount}">D</a></span></div></dd>
 				</s:iterator>
 			<dt id="member_list">Member(s)</dt>
 			<dt id="leader_list">Leader</dt>

@@ -25,6 +25,8 @@ public interface UserDAO {
 	
 	public User findUserByCode(String code);
 	
+	public List<User> getUserListByNameLike(String username, int limit);
+	
 	public int findUidByAccount(String account);
 	
 	public List<User> findUserSetByUids(String uids);

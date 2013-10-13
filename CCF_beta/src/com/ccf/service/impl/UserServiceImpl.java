@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	public void register(User user) {
-		this.userDao.registerUser(user);	//这里才真正注册user
+		this.userDao.registerUser(user);	//è¿™é‡Œæ‰�çœŸæ­£æ³¨å†Œuser
 	}
 	
 	public List<User> fetchUsersList() {
@@ -54,6 +54,10 @@ public class UserServiceImpl implements UserService {
 	
 	public User findUserByCode(String code) {
 		return this.userDao.findUserByCode(code);
+	}
+	
+	public List<User> getUserListByNameLike(String username, int limit) {
+		return this.userDao.getUserListByNameLike(username, limit);
 	}
 	
 	public List<Map<String, Object>> findUsersInfoByUids(String uids) {
@@ -145,7 +149,7 @@ public class UserServiceImpl implements UserService {
 				return "applying";
 		}
 		
-		return "харашо";	// good to go
+		return "Ñ…Ð°Ñ€Ð°ÑˆÐ¾";	// good to go
 	}
 	
 	public void joinClub(int uid, int cid) {

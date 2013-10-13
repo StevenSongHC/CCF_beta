@@ -25,7 +25,7 @@ public interface ClubDAO {
 	
 	public int[] clubMemberUidArray(int cid);
 	
-	public int[] clubPublishUidArray(int cid);
+	public int[] clubPublisherUidArray(int cid);
 	
 	public String clubMemberUidString(int cid);
 	

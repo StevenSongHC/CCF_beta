@@ -69,7 +69,7 @@ public class ClubDAOImpl extends HibernateDaoSupport implements ClubDAO {
 				+ "',club.c_name='" + club.getC_name() + "',club.c_intro='" 
 				+ club.getC_intro() + "',club.c_field='" + club.getC_field()
 				+ "' where cid=" + club.getCid();
-		//'符号导致数据更新失败
+		//'ç¬¦å�·å¯¼è‡´æ•°æ�®æ›´æ–°å¤±è´¥
 		System.out.println("hql check:" + hql);	//For debug using
 		Query query = session.createQuery(hql);  
 		query.executeUpdate();  
@@ -108,7 +108,7 @@ public class ClubDAOImpl extends HibernateDaoSupport implements ClubDAO {
 		return new FormatTransformer().transformString2IntegerArray(executeSql(sql).toString(), ",");
 	}
 	
-	public int[] clubPublishUidArray(int cid) {
+	public int[] clubPublisherUidArray(int cid) {
 		String sql = "SELECT c_code_edit_authority_members FROM club WHERE cid=" + cid;
 		return new FormatTransformer().transformString2IntegerArray(executeSql(sql).toString(), ",");
 	}
@@ -145,7 +145,7 @@ public class ClubDAOImpl extends HibernateDaoSupport implements ClubDAO {
 	}
 	
 	public boolean updateCCodeEditAuthorityMembers(int cid, String newCCodeEditAuthorityMembers) {
-		System.out.println("newCMembers:" + newCCodeEditAuthorityMembers);
+		System.out.println("newCPublisers:" + newCCodeEditAuthorityMembers);
 		String sql = null;
 		Session session = this.getHibernateTemplate().getSessionFactory().openSession();
 		Transaction tx = session.beginTransaction();

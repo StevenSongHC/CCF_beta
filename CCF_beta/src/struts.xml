@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
+
+	<!-- 尝试解决乱码 -->
+	<constant name="struts.i18n.encoding" value="UTF-8"></constant>
+	
 	<package name="com.ccf" extends="struts-default">
 		
 		<!-- config interceptor -->
@@ -193,6 +197,11 @@
 			<result name="success" type="redirect">homepage/myclub_${cid}</result>
 		</action>
 		
+		<action name="operateProvince" class="operateProvinceAction">
+			<result name="login" type="redirect">/login.jsp</result>
+			<result name="success">/stev_province_data_operation.jsp</result>
+		</action>
+		
 	</package>
 	
 	
@@ -213,6 +222,18 @@
 		<action name="loadUserName" class="ajaxLoadUserNameAction">
 			<result name="success" type="json">
 				<param name="root">result</param>
+			</result>
+		</action>
+		
+		<action name="searchSuggestion" class="ajaxSearchSuggestionAction">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		
+		<action name="saveAndFetchLastProvince" class="saveAndFetchLastProvinceAction">
+			<result name="success" type="json">
+				<param name="root">data</param>
 			</result>
 		</action>
 		

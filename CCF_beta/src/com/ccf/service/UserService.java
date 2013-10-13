@@ -23,6 +23,8 @@ public interface UserService {
 	
 	public User findUserByCode(String code);	//trace user by code
 	
+	public List<User> getUserListByNameLike(String username, int limit);
+	
 	public List<Map<String, Object>> findUsersInfoByUids(String uids); 
 	
 	public User getCurrentUser();
