@@ -32,6 +32,7 @@
 				<value>User.hbm.xml</value>
 				<value>Club.hbm.xml</value>
 				<value>Province.hbm.xml</value>
+				<value>City.hbm.xml</value>
 			</list>
 		</property>		
 		<property name="hibernateProperties">
@@ -74,6 +75,12 @@
 		</property>		
 	</bean>
 	
+	<bean id="cityDao" class="com.ccf.dao.impl.CityDAOImpl" scope="singleton">	<!-- 无状态，仅用于保存前面传过来的数据 -->	
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>		
+	</bean>
+	
 	<bean id="stevDao" class="com.ccf.dao.impl.StevDAOImpl" scope="singleton">	<!-- 无状态，仅用于保存前面传过来的数据 -->	
 		<property name="sessionFactory">
 			<ref bean="sessionFactory"/>
@@ -92,6 +99,10 @@
 	
 	<bean id="provinceService" class="com.ccf.service.impl.ProvinceServiceImpl">
 		<property name="provinceDao" ref="provinceDao" />	
+	</bean>
+	
+	<bean id="cityService" class="com.ccf.service.impl.CityServiceImpl">
+		<property name="cityDao" ref="cityDao" />	
 	</bean>
 	
 	<bean id="stevService" class="com.ccf.service.impl.StevServiceImpl"> <!-- scope默认singleton -->	
@@ -230,6 +241,14 @@
 	</bean>
 	
 	<bean id="operateProvinceAction" class="com.ccf.action.province.ListProvinceAction" scope="prototype">
+		<property name="prService" ref="provinceService" />
+	</bean>
+	
+	<bean id="operateCityAction" class="com.ccf.action.city.ListCityAction" scope="prototype">
+		<property name="ctService" ref="cityService" />
+	</bean>
+	
+	<bean id="updateAndReturnProvinceDataAction" class="com.ccf.action.province.UpdateProvinceAction" scope="prototype">
 		<property name="prService" ref="provinceService" />
 	</bean>
 	

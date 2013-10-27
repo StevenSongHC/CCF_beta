@@ -160,7 +160,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
     <hr><hr>
     Some Database Entities
-    <s:a href="operateProvince">Province(省份)</s:a>
+    <s:a href="operateProvince">Province(省份)</s:a>——<s:a href="operateCity">City(城市)</s:a>
 
 	<hr>
     <% 

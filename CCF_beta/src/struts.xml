@@ -202,6 +202,11 @@
 			<result name="success">/stev_province_data_operation.jsp</result>
 		</action>
 		
+		<action name="operateCity" class="operateCityAction">
+			<result name="login" type="redirect">/login.jsp</result>
+			<result name="success">/stev_city_data_operation.jsp</result>
+		</action>
+		
 	</package>
 	
 	
@@ -226,6 +231,12 @@
 		</action>
 		
 		<action name="searchSuggestion" class="ajaxSearchSuggestionAction">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		
+		<action name="updateAndReturnProvinceData" class="updateAndReturnProvinceDataAction">
 			<result name="success" type="json">
 				<param name="root">result</param>
 			</result>

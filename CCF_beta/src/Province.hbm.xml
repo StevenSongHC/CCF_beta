@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.ccf.bean.Province" table="province" catalog="beta">
+        <id name="id" type="integer">
+            <column name="prid" />
+            <generator class="native" />
+        </id>
+        <property name="name" type="string">
+            <column name="pr_name" length="20" not-null="true" />
+        </property>
+        <property name="cnName" type="string">
+            <column name="pr_cn_name" length="20" />
+        </property>
+        <property name="cnShortName" type="string">
+            <column name="pr_cn_short_name" length="4" />
+        </property>
+        <property name="capital" type="string">
+            <column name="pr_capital" length="15" />
+        </property>
+        <property name="cityAmount" type="integer">
+            <column name="pr_city_amount" length="2" />
+        </property>
+        <property name="brightness" type="integer">
+            <column name="pr_brightness" length="3" />
+        </property>
+    </class>
+    
+</hibernate-mapping>
