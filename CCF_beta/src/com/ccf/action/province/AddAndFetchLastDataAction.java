@@ -4,6 +4,7 @@ import net.sf.json.JSONObject;
 
 import com.ccf.bean.Province;
 import com.ccf.service.ProvinceService;
+import com.ccf.util.FileUtil;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class AddAndFetchLastDataAction extends ActionSupport {
@@ -86,6 +87,8 @@ public class AddAndFetchLastDataAction extends ActionSupport {
 		province.setCityAmount(cityAmount);
 		province.setBrightness(brightness);
 		prService.add(province);
+		// and create a subfolder after province's name under the "archive-activities" folder
+		new FileUtil().createFolder("archive-activities", name);
 		// then return this province data
 		data = JSONObject.fromObject(prService.getLastProvince()).toString();
 		return SUCCESS;

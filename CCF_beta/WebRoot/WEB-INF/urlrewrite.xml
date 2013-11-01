@@ -6,7 +6,7 @@
 <urlrewrite>
     
 	<rule>
-		<from>^/homepage/myclub_([0-9]*)</from>
+		<from>^/homepage/myclub/([0-9]*)</from>
         <to>/enterClub?cid=$1</to>
     </rule>
     

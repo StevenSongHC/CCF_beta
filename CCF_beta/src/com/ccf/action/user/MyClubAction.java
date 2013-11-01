@@ -70,41 +70,50 @@ public class MyClubAction extends ActionSupport implements RequestAware {
 		
 		Map<String, Object> details = new HashMap<String, Object>();
 		
-		if (job.equals("free"))
+		if (job.equals("free")) {
 			destination = "goClubIndex?club.cid=" + cid;
+			return job;
+		}
+		
+		// return something details inside the club
+		Map<String, Object> clubOriginalData = clubService.clubCommanDetails(Integer.parseInt(cid));
+		System.out.println("clubDetails:" + clubOriginalData.toString());
+		
+		details.put("cid", clubOriginalData.get("cid"));
+		details.put("name", clubOriginalData.get("name"));
+		details.put("pic", clubOriginalData.get("pic").toString());
+		details.put("url", clubOriginalData.get("url").toString());
+		details.put("member", clubOriginalData.get("member").toString());
+		details.put("intro", clubOriginalData.get("intro").toString());
+		details.put("activity", clubOriginalData.get("activity").toString());
+		details.put("file", clubOriginalData.get("file").toString());
+		details.put("xp", clubOriginalData.get("xp").toString());
+		details.put("province", clubOriginalData.get("province").toString());
+		details.put("city", clubOriginalData.get("city").toString());
+		details.put("college", clubOriginalData.get("college").toString());
+		details.put("tag", clubOriginalData.get("tag").toString());
+		
+		// return publishers' and leader's username instead of uid by default
+		// PS: show members's username by Ajax
+		details.put("publisher", this.userService.findUsersInfoByUids(clubOriginalData.get("publisher").toString()));
+		details.put("leader", this.userService.findUsersInfoByUids(clubOriginalData.get("leader").toString()));
+		
+		System.out.println("Dtails:" + details.toString());
+		
+		requestMap.put("clubinfo", details);
 		
 		if (job.equals("leader")) {
-			Map<String, Object> clubOriginalData = clubService.clubLeaderDetails(Integer.parseInt(cid));
-			System.out.println("clubDetails:" + clubOriginalData.toString());
-			
-			details.put("cid", clubOriginalData.get("cid"));
-			details.put("name", clubOriginalData.get("name"));
-			details.put("pic", clubOriginalData.get("pic").toString());
-			details.put("url", clubOriginalData.get("url").toString());
-			details.put("member", clubOriginalData.get("member").toString());
-			details.put("intro", clubOriginalData.get("intro").toString());
-			details.put("activity", clubOriginalData.get("activity").toString());
-			details.put("file", clubOriginalData.get("file").toString());
-			details.put("xp", clubOriginalData.get("xp").toString());
-			details.put("province", clubOriginalData.get("province").toString());
-			details.put("city", clubOriginalData.get("city").toString());
-			details.put("college", clubOriginalData.get("college").toString());
-			details.put("tag", clubOriginalData.get("tag").toString());
-			
-			// return publishers' nad leader's username instead of uid by default
-			// PS: show members's username by Ajax
-			details.put("publisher", this.userService.findUsersInfoByUids(clubOriginalData.get("publisher").toString()));
-			details.put("leader", this.userService.findUsersInfoByUids(clubOriginalData.get("leader").toString()));
-			
-			System.out.println("Dtails:" + details.toString());
-			
-			requestMap.put("clubinfo", details);
-			destination = "/myclub_leader.jsp";
+			// TODO
+			// something unique
 		}
-			
 		
-		if (job.equals("member"))
-			destination = "/myclub_member.jsp";
+		if (job.equals("publisher")) {
+			// TODO
+		}
+		
+		if (job.equals("member")) {
+			
+		}
 		
 		if (job.equals("killer"))
 			destination = "/myclub_member.jsp";

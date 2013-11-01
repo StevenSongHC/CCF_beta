@@ -15,7 +15,7 @@ public interface ClubService {
 	
 	public void updateBasicInfo(Club club);
 	
-	public Map<String, Object> clubLeaderDetails(int cid);
+	public Map<String, Object> clubCommanDetails(int cid);
 
 	public void addMember(int cid, int uid);
 	

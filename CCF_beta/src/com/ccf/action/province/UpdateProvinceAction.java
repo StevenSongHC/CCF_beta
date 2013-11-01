@@ -4,6 +4,7 @@ import net.sf.json.JSONObject;
 
 import com.ccf.bean.Province;
 import com.ccf.service.ProvinceService;
+import com.ccf.util.FileUtil;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class UpdateProvinceAction extends ActionSupport {
@@ -86,7 +87,13 @@ public class UpdateProvinceAction extends ActionSupport {
 		province.setCapital(newCapital);
 		province.setCityAmount(newCityAmount);
 		province.setBrightness(newBrightness);
+		// get the old name of this province
+		String oldName = prService.getProvince(prid).getName();
+		// update province folder name
+		new FileUtil().renameFolder("archive-activities", oldName, newName);
+		// then update database
 		prService.update(province);
+		
 		result = JSONObject.fromObject(prService.getProvince(province.getId())).toString();
 		return SUCCESS;
 	}

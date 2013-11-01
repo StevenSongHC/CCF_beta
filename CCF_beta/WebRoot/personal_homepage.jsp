@@ -39,7 +39,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<center>My Summary:<s:property value="%{user.u_summary}"/></center><br>
 	<!-- user's club info -->
 	<s:iterator value="#request.clublist" id="clubinfo">
-	<ul><s:a href="homepage/myclub_%{#clubinfo.cid}"><s:property value="#clubinfo.clubname"/></s:a> (<s:property value="#clubinfo.jobname"/>)</ul>
+	<ul><s:a href="homepage/myclub/%{#clubinfo.cid}"><s:property value="#clubinfo.clubname"/></s:a> (<s:property value="#clubinfo.jobname"/>)</ul>
 	</s:iterator>
 	
 	<s:a href="setting">Setting My Staff</s:a>

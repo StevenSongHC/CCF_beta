@@ -34,7 +34,7 @@ public class ClubServiceImpl implements ClubService {
 		this.clubDao.updateClubBasicInfo(club);
 	}
 	
-	public Map<String, Object> clubLeaderDetails(int cid) {
+	public Map<String, Object> clubCommanDetails(int cid) {
 		return this.clubDao.clubDetails(cid);
 	}
 	

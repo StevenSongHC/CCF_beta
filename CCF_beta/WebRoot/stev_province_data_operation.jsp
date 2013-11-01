@@ -29,7 +29,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			});
 			$("#confirm").click(function() {
 				if ($("tr .name:last input").val() !== "" && $("tr .cnName:last input").val() !== "" && $("tr .cnShortName:last input").val() !== "" && $("tr .capital:last input").val() !== "" && $("tr .cityAmount:last input").val() !== "" && $("tr .brightness:last input").val() !== "") {
-					/* saveAndFetchLastData(); */
+					saveAndFetchLastData();
 					$("tr :last").addClass("content");
 				}
 				else
@@ -106,7 +106,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				$("tr:last .id").empty();
 				$("tr:last input").remove();
 				/* fill the last data into the last row */
-				$("tr .id:last").html("<div class=\"item\" order="+ data.id + "></div>" + data.id);
+				$("tr:last").attr("order" , data.id);
+				$("tr .id:last").html("<div class=\"item\"></div>" + data.id);
 				$("tr .name:last").html(data.name);
 				$("tr .cnName:last").html(data.cnName);
 				$("tr .cnShortName:last").html(data.cnShortName);
