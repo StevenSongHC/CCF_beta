@@ -20,4 +20,24 @@ public class CityServiceImpl implements CityService {
 	public List<City> list() {
 		return this.cityDao.list();
 	}
+
+	
+	public void add(City city) {
+		cityDao.add(city);
+	}
+
+	
+	public City getLastCity() {
+		return cityDao.fetchCity("last");
+	}
+
+	
+	public City getCity(int ctid) {
+		return this.cityDao.getCityByPrid(ctid);
+	}
+
+	
+	public void update(City city) {
+		cityDao.update(city);
+	}
 }

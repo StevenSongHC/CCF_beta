@@ -248,12 +248,20 @@
 		<property name="ctService" ref="cityService" />
 	</bean>
 	
+	<bean id="saveAndFetchLastProvinceAction" class="com.ccf.action.province.AddAndFetchLastDataAction" scope="prototype">
+		<property name="prService" ref="provinceService" />
+	</bean>
+	
+	<bean id="saveAndFetchLastCityAction" class="com.ccf.action.city.AddAndFetchLastDataAction" scope="prototype">
+		<property name="ctService" ref="cityService" />
+	</bean>
+	
 	<bean id="updateAndReturnProvinceDataAction" class="com.ccf.action.province.UpdateProvinceAction" scope="prototype">
 		<property name="prService" ref="provinceService" />
 	</bean>
 	
-	<bean id="saveAndFetchLastProvinceAction" class="com.ccf.action.province.AddAndFetchLastDataAction" scope="prototype">
-		<property name="prService" ref="provinceService" />
+	<bean id="updateAndReturnCityDataAction" class="com.ccf.action.city.UpdateCityAction" scope="prototype">
+		<property name="ctService" ref="cityService" />
 	</bean>
 	
 </beans>

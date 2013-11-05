@@ -236,15 +236,26 @@
 			</result>
 		</action>
 		
+		<action name="saveAndFetchLastProvince" class="saveAndFetchLastProvinceAction">
+			<result name="success" type="json">
+				<param name="root">data</param>
+			</result>
+		</action>
+		
+		<action name="saveAndFetchLastCity" class="saveAndFetchLastCityAction">
+			<result name="success" type="json">
+				<param name="root">data</param>
+			</result>
+		</action>
+		
 		<action name="updateAndReturnProvinceData" class="updateAndReturnProvinceDataAction">
 			<result name="success" type="json">
 				<param name="root">result</param>
 			</result>
 		</action>
-		
-		<action name="saveAndFetchLastProvince" class="saveAndFetchLastProvinceAction">
+		<action name="updateAndReturnCityData" class="updateAndReturnCityDataAction">
 			<result name="success" type="json">
-				<param name="root">data</param>
+				<param name="root">result</param>
 			</result>
 		</action>
 		

@@ -2,6 +2,8 @@ package com.ccf.dao.impl;
 
 import java.util.List;
 
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.ccf.bean.City;
@@ -12,6 +14,42 @@ public class CityDAOImpl extends HibernateDaoSupport implements CityDAO {
 	@SuppressWarnings("unchecked")
 	public List<City> list() {
 		return (List<City>)this.getHibernateTemplate().find("from City city order by city.id asc");	
+	}
+
+	public void add(City city) {
+		this.getHibernateTemplate().save(city);
+	}
+
+	public City fetchCity(String index) {
+		Session session = this.getHibernateTemplate().getSessionFactory().openSession();  
+		session.beginTransaction();
+		String hql = "";
+		if (index.equals("first")) {
+			hql = "from City ct where ct.id=1";		// start with 1
+		}
+		else if (index.equals("last")) {
+			hql = "from City ct where ct.id=(select max(c.id) from City c)";
+		}
+		else {
+			return null;
+		}
+		Query query = session.createQuery(hql);
+		session.getTransaction().commit();
+		return (City) query.uniqueResult();
+	}
+
+	public City getCityByPrid(int ctid) {
+		return (City)this.getHibernateTemplate().get(City.class, ctid);
+	}
+
+	public void update(City city) {
+		String hql = "update City city set city.name='" + city.getName() + "',city.cnName='" + city.getCnName() + "',city.collegeAmount='" + 
+						city.getCollegeAmount() + "',city.clubAmount=" + city.getClubAmount() + ",city.prid=" + city.getPrid() +  
+						" where city.id=" + city.getId();
+		Session session = this.getHibernateTemplate().getSessionFactory().getCurrentSession();  
+		session.beginTransaction();  
+		session.createQuery(hql).executeUpdate(); 
+		session.getTransaction().commit();
 	}
 
 }

@@ -6,6 +6,7 @@ public class City {
 	private String name;
 	private String cnName;
 	private int collegeAmount;
+	private int clubAmount;
 	private int prid;
 	public int getId() {
 		return id;
@@ -30,6 +31,12 @@ public class City {
 	}
 	public void setCollegeAmount(int collegeAmount) {
 		this.collegeAmount = collegeAmount;
+	}
+	public int getClubAmount() {
+		return clubAmount;
+	}
+	public void setClubAmount(int clubAmount) {
+		this.clubAmount = clubAmount;
 	}
 	public int getPrid() {
 		return prid;

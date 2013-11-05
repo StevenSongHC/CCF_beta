@@ -17,6 +17,9 @@
         <property name="collegeAmount" type="integer">
             <column name="ct_college_amount" length="3" />
         </property>
+        <property name="clubAmount" type="integer">
+            <column name="ct_club_amount" length="3" />
+        </property>
         <property name="prid" type="integer">
             <column name="ct_prid" length="3" />
         </property>

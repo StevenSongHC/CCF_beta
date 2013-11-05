@@ -18,7 +18,6 @@ public class ProvinceServiceImpl implements ProvinceService {
 	}
 
 	public List<Province> list() {
-		System.out.println("Size():" + this.provinceDao.list().size());
 		return this.provinceDao.list();
 	}
 	

@@ -19,6 +19,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
 	
+	<link rel="stylesheet" type="text/css" href="css/layout-datatable.css">
+	
 	<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -28,7 +30,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				$("#confirm,#cancel").toggleClass("invisible");
 			});
 			$("#confirm").click(function() {
-				if ($("tr .name:last input").val() !== "" && $("tr .cnName:last input").val() !== "" && $("tr .cnShortName:last input").val() !== "" && $("tr .capital:last input").val() !== "" && $("tr .cityAmount:last input").val() !== "" && $("tr .brightness:last input").val() !== "") {
+				if ($("tr .name:last input").val().trim() !== "" && $("tr .cnName:last input").val().trim() !== "" && $("tr .cnShortName:last input").val().trim() !== "" && $("tr .capital:last input").val().trim() !== "" && $("tr .cityAmount:last input").val().trim() !== "" && $("tr .brightness:last input").val().trim() !== "") {
 					saveAndFetchLastData();
 					$("tr :last").addClass("content");
 				}
@@ -60,28 +62,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					a.find("td[class='id']").html("<span class=\"btn\" func=\"update\">update</span><span class=\"btn\" func=\"discard\">discard</span>");
 					
 					$("span[func='update']").click(function() {
-						// first of all, get the data by posting the prid
-						$.ajax( {
-							type: "POST",
-							url: "updateAndReturnProvinceData",
-							data: { prid: a.attr("order"), newName: $("td.name>input").val(), newCnName : $("td.cnName>input").val(), newCnShortName : $("td.cnShortName>input").val(), newCapital : $("td.capital>input").val(), newCityAmount : $("td.cityAmount>input").val(), newBrightness : $("td.brightness>input").val() },
-							dataType: "json"
-						}).done(function( json ) {
-						// then refresh the whole line
-							var data = eval("("+json+")");
-							a.find("td[class='id']").html("<div class=\"item\"></div>"+data.id);
-							a.find("td[class='name']").html(data.name);
-							a.find("td[class='cnName']").html(data.cnName);
-							a.find("td[class='cnShortName']").html(data.cnShortName);
-							a.find("td[class='capital']").html(data.capital);
-							a.find("td[class='cityAmount']").html(data.cityAmount);
-							a.find("td[class='brightness']").html(data.brightness);
-							
-						}).fail(function() {
-							alert("FAIL");
-						}).error(function (XMLHttpRequest, textStatus, errorThrown) {
-							$("#ajax").html(XMLHttpRequest.responseText);
-						});
+						if ($("tr .name input").val().trim() !== "" && $("tr .cnName input").val().trim() !== "" && $("tr .cnShortName input").val().trim() !== "" && $("tr .capital input").val().trim() !== "" && $("tr .cityAmount input").val().trim() !== "" && $("tr .brightness input").val().trim() !== "") {
+							// first of all, get the data by posting the prid
+							$.ajax( {
+								type: "POST",
+								url: "updateAndReturnProvinceData",
+								data: { prid: a.attr("order"), newName: $("td.name>input").val(), newCnName : $("td.cnName>input").val(), newCnShortName : $("td.cnShortName>input").val(), newCapital : $("td.capital>input").val(), newCityAmount : $("td.cityAmount>input").val(), newBrightness : $("td.brightness>input").val() },
+								dataType: "json"
+							}).done(function( json ) {
+							// then refresh the whole line
+								var data = eval("("+json+")");
+								a.find("td[class='id']").html("<div class=\"item\"></div>"+data.id);
+								a.find("td[class='name']").html(data.name);
+								a.find("td[class='cnName']").html(data.cnName);
+								a.find("td[class='cnShortName']").html(data.cnShortName);
+								a.find("td[class='capital']").html(data.capital);
+								a.find("td[class='cityAmount']").html(data.cityAmount);
+								a.find("td[class='brightness']").html(data.brightness);
+								
+							}).fail(function() {
+								alert("FAIL");
+							}).error(function (XMLHttpRequest, textStatus, errorThrown) {
+								$("#ajax").html(XMLHttpRequest.responseText);
+							});
+						}
+						else
+							alert("请输入完整的属性!");
 					});
 					// cancel
 					$("span[func='discard']").click(function() {
@@ -122,80 +128,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			});
 		}
 	</script>
-	<style type="text/css">
-		#main {
-			width: 75%;
-			margin: auto;
-		}
-		table {
-			text-align: center;
-			width: 100%;
-			/* table-layout: fixed; */
-		}
-		tr {
-			position: relative;
-			line-height: 28px;
-			/* display: block; */
-		}
-		td {
-			/* overflow: hidden;
-			white-space: nowrap;
-			text-overflow: ellipsis; */
-			
-		}
-		input[type="text"] {
-			width: 100%;	/* only for advanced browser */
-			text-align: center;
-		}
-		.item {
-			display: inline-block;
-			position: relative;
-			float: left;
-		}
-		.btn {
-			display: inline-block;
-			padding: 0 0.5em;
-			line-height: 1.2em;
-			text-align: center;
-			border: 1px solid #3C3C3C;
-			color: #000;
-			cursor: default;
-		}
-		.btn-add {
-			width: 26px;
-			height: 26px;
-			margin: 0;
-			padding: 0;
-			display: inline-block;
-			position: relative;
-			left: -26px;
-			background: url('images/plus.png') no-repeat;
-		}
-		.btn-edit {
-			width: 26px;
-			height: 26px;
-			padding: 0;
-			display: block;
-			background: url('images/pencil.png') no-repeat;
-			position: absolute;
-			/* left: -33px; */
-		}
-		.more {
-			margin: auto;
-		}
-		.visible {
-			display: inline-block;
-		}
-		.invisible {
-			display: none;
-		}
-	</style>
+	
   </head>
   
   <body>
     
     <h1>省份</h1>
-    <div id="main">
+    <div id="main" style="width:75%;">
     <table border="1">
     	<tr> 
 			<td width="6%">PRID</td>
