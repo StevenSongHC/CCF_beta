@@ -33,6 +33,7 @@
 				<value>Club.hbm.xml</value>
 				<value>Province.hbm.xml</value>
 				<value>City.hbm.xml</value>
+				<value>College.hbm.xml</value>
 			</list>
 		</property>		
 		<property name="hibernateProperties">
@@ -81,6 +82,12 @@
 		</property>		
 	</bean>
 	
+	<bean id="collegeDao" class="com.ccf.dao.impl.CollegeDAOImpl" scope="singleton">	<!-- 无状态，仅用于保存前面传过来的数据 -->	
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>		
+	</bean>
+	
 	<bean id="stevDao" class="com.ccf.dao.impl.StevDAOImpl" scope="singleton">	<!-- 无状态，仅用于保存前面传过来的数据 -->	
 		<property name="sessionFactory">
 			<ref bean="sessionFactory"/>
@@ -103,6 +110,10 @@
 	
 	<bean id="cityService" class="com.ccf.service.impl.CityServiceImpl">
 		<property name="cityDao" ref="cityDao" />	
+	</bean>
+	
+	<bean id="collegeService" class="com.ccf.service.impl.CollegeServiceImpl">
+		<property name="collegeDao" ref="collegeDao" />	
 	</bean>
 	
 	<bean id="stevService" class="com.ccf.service.impl.StevServiceImpl"> <!-- scope默认singleton -->	
@@ -248,6 +259,10 @@
 		<property name="ctService" ref="cityService" />
 	</bean>
 	
+	<bean id="operateCollegeAction" class="com.ccf.action.college.ListCollegeAction" scope="prototype">
+		<property name="coService" ref="collegeService" />
+	</bean>
+	
 	<bean id="saveAndFetchLastProvinceAction" class="com.ccf.action.province.AddAndFetchLastDataAction" scope="prototype">
 		<property name="prService" ref="provinceService" />
 	</bean>
@@ -256,12 +271,24 @@
 		<property name="ctService" ref="cityService" />
 	</bean>
 	
+	<bean id="saveAndFetchLastCollegeAction" class="com.ccf.action.college.AddAndFetchLastDataAction" scope="prototype">
+		<property name="prService" ref="provinceService" />
+		<property name="ctService" ref="cityService" />
+		<property name="coService" ref="collegeService" />
+	</bean>
+	
 	<bean id="updateAndReturnProvinceDataAction" class="com.ccf.action.province.UpdateProvinceAction" scope="prototype">
 		<property name="prService" ref="provinceService" />
 	</bean>
 	
 	<bean id="updateAndReturnCityDataAction" class="com.ccf.action.city.UpdateCityAction" scope="prototype">
 		<property name="ctService" ref="cityService" />
+	</bean>
+	
+	<bean id="updateAndReturnCollegeDataAction" class="com.ccf.action.college.UpdateCollegeAction" scope="prototype">
+		<property name="prService" ref="provinceService" />
+		<property name="ctService" ref="cityService" />
+		<property name="coService" ref="collegeService" />
 	</bean>
 	
 </beans>

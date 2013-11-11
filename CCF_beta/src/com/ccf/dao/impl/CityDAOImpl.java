@@ -38,7 +38,7 @@ public class CityDAOImpl extends HibernateDaoSupport implements CityDAO {
 		return (City) query.uniqueResult();
 	}
 
-	public City getCityByPrid(int ctid) {
+	public City getCityByCtid(int ctid) {
 		return (City)this.getHibernateTemplate().get(City.class, ctid);
 	}
 

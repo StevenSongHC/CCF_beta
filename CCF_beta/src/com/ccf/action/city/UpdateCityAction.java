@@ -4,7 +4,6 @@ import net.sf.json.JSONObject;
 
 import com.ccf.bean.City;
 import com.ccf.service.CityService;
-import com.ccf.util.FileUtil;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class UpdateCityAction extends ActionSupport {
@@ -21,6 +20,7 @@ public class UpdateCityAction extends ActionSupport {
 	private int newCollegeAmount;
 	private int newClubAmount;
 	private int newPrid;
+	private String oldName;
 	public CityService getCtService() {
 		return ctService;
 	}
@@ -69,6 +69,12 @@ public class UpdateCityAction extends ActionSupport {
 	public void setNewPrid(int newPrid) {
 		this.newPrid = newPrid;
 	}
+	public String getOldName() {
+		return oldName;
+	}
+	public void setOldName(String oldName) {
+		this.oldName = oldName;
+	}
 	
 	public String execute() throws Exception {
 		City city = new City();
@@ -78,13 +84,9 @@ public class UpdateCityAction extends ActionSupport {
 		city.setCollegeAmount(newCollegeAmount);
 		city.setClubAmount(newClubAmount);
 		city.setPrid(newPrid);
-		// get the old name of this city
-		/*String oldName = ctService.getCity(ctid).getName();*/
-		// update city folder name
-		/*new FileUtil().renameFolder("archive-activities", oldName, newName);*/
-		// then update database
 		ctService.update(city);
-		
+		// rename folder
+		new com.ccf.util.FileUtil().renameCityPart(oldName, newName);
 		result = JSONObject.fromObject(ctService.getCity(city.getId())).toString();
 		return SUCCESS;
 	}

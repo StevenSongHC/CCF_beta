@@ -27,6 +27,7 @@ public class FileUtil {
 	
 	/**
 	 * 
+	 * use in collegeFolder creation and datePackFolder creation
 	 * @param parent
 	 * @param child
 	 * @return
@@ -111,7 +112,7 @@ public class FileUtil {
 					e.printStackTrace();
 				}
 			}
-			else {	//cannot rename a no existed folder
+			else {	//cannot rename a not existed folder
 				System.out.println("no such folder existed");
 			}
 		}
@@ -189,6 +190,76 @@ public class FileUtil {
 			return false;
 		}
 		return true;
+	}
+	
+	/**
+	 * 
+	 * @param prName
+	 * @param ctName
+	 * @param coCode
+	 * 
+	 * path kinda like "\archive\GuangDong-GuangZhou-GDUT"
+	 * 
+	 * @return status
+	 */
+	public boolean createCollegeFolder(String provinceName, String cityName, String collegeName) {
+		return createFolder("archive", provinceName+"-"+cityName+"-"+collegeName);
+	}
+	
+	/**
+	 * 
+	 * @param oldProvinceName
+	 * @param oldCityName
+	 * @param oldCollegeName
+	 * @param newProvinceName
+	 * @param newCityName
+	 * @param newCollegeName
+	 * @return status
+	 */
+	public boolean renameCollegeFolder(String oldProvinceName, String oldCityName, String oldCollegeName, 
+									   String newProvinceName, String newCityName, String newCollegeName) {
+		return renameFolder("archive", oldProvinceName+"-"+oldCityName+"-"+oldCollegeName, 
+									   newProvinceName+"-"+newCityName+"-"+newCollegeName); 
+	}
+	
+	/**
+	 * 
+	 * @param oldProvinceName
+	 * @param newProvinceName
+	 * @return status
+	 */
+	public boolean renameProvincePart(String oldProvinceName, String newProvinceName) {
+		boolean status = true;
+		File f = new File(realPath+"\\"+"archive");
+		File[] files = f.listFiles();
+		for (File file : files) {
+			String[] fileName = file.getName().split("-");
+			if (fileName[0].equals(oldProvinceName))
+				renameFolder("archive", fileName[0]+"-"+fileName[1]+"-"+fileName[2], newProvinceName+"-"+fileName[1]+"-"+fileName[2]);
+			else
+				status = false;
+		}
+		return status;
+	}
+	
+	/**
+	 * 
+	 * @param oldCityName
+	 * @param newCityName
+	 * @return status
+	 */
+	public boolean renameCityPart(String oldCityName, String newCityName) {
+		boolean status = true;
+		File f = new File(realPath+"\\"+"archive");
+		File[] files = f.listFiles();
+		for (File file : files) {
+			String[] fileName = file.getName().split("-");
+			if (fileName[1].equals(oldCityName))
+				renameFolder("archive", fileName[0]+"-"+fileName[1]+"-"+fileName[2], fileName[0]+"-"+newCityName+"-"+fileName[2]);
+			else
+				status = false;
+		}
+		return status;
 	}
 	
 }

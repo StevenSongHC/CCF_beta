@@ -4,7 +4,6 @@ import net.sf.json.JSONObject;
 
 import com.ccf.bean.Province;
 import com.ccf.service.ProvinceService;
-import com.ccf.util.FileUtil;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class AddAndFetchLastDataAction extends ActionSupport {
@@ -14,7 +13,6 @@ public class AddAndFetchLastDataAction extends ActionSupport {
 	 */
 	private static final long serialVersionUID = 8864479556122202521L;
 	private ProvinceService prService;
-	private int id;
 	private String name;
 	private String cnName;
 	private String cnShortName;
@@ -27,12 +25,6 @@ public class AddAndFetchLastDataAction extends ActionSupport {
 	}
 	public void setPrService(ProvinceService prService) {
 		this.prService = prService;
-	}
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
 	}
 	public String getName() {
 		return name;
@@ -87,8 +79,6 @@ public class AddAndFetchLastDataAction extends ActionSupport {
 		province.setCityAmount(cityAmount);
 		province.setBrightness(brightness);
 		prService.add(province);
-		// and create a subfolder after province's name under the "archive-activities" folder
-		new FileUtil().createFolder("archive-activities", name);
 		// then return this province data
 		data = JSONObject.fromObject(prService.getLastProvince()).toString();
 		return SUCCESS;

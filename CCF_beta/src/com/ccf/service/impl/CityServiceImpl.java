@@ -33,7 +33,7 @@ public class CityServiceImpl implements CityService {
 
 	
 	public City getCity(int ctid) {
-		return this.cityDao.getCityByPrid(ctid);
+		return this.cityDao.getCityByCtid(ctid);
 	}
 
 	

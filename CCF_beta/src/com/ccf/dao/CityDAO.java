@@ -12,7 +12,7 @@ public interface CityDAO {
 	
 	public City fetchCity(String index);		// index = first || last, only accept string index
 	
-	public City getCityByPrid(int ctid);
+	public City getCityByCtid(int ctid);
 	
 	public void update(City city);
 }

@@ -207,6 +207,11 @@
 			<result name="success">/stev_city_data_operation.jsp</result>
 		</action>
 		
+		<action name="operateCollege" class="operateCollegeAction">
+			<result name="login" type="redirect">/login.jsp</result>
+			<result name="success">/stev_college_data_operation.jsp</result>
+		</action>
+		
 	</package>
 	
 	
@@ -247,6 +252,11 @@
 				<param name="root">data</param>
 			</result>
 		</action>
+		<action name="saveAndFetchLastCollege" class="saveAndFetchLastCollegeAction">
+			<result name="success" type="json">
+				<param name="root">data</param>
+			</result>
+		</action>
 		
 		<action name="updateAndReturnProvinceData" class="updateAndReturnProvinceDataAction">
 			<result name="success" type="json">
@@ -254,6 +264,11 @@
 			</result>
 		</action>
 		<action name="updateAndReturnCityData" class="updateAndReturnCityDataAction">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<action name="updateAndReturnCollegeData" class="updateAndReturnCollegeDataAction">
 			<result name="success" type="json">
 				<param name="root">result</param>
 			</result>

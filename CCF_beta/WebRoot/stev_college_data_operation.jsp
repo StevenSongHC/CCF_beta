@@ -10,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>操作城市数据</title>
+    <title>操作大学数据</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -24,12 +24,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$("#add").click(function() {
-				$("table").append("<tr><td class=\"id\">increment</td><td class=\"name\"><input type=\"text\"></td><td class=\"cnName\"><input type=\"text\"></td><td class=\"collegeAmount\"><input type=\"text\" value=\"0\"></td><td class=\"clubAmount\"><input type=\"text\" value=\"0\"></td><td class=\"prid\"><input type=\"text\" value=\"0\"></td></tr>");
+				$("table").append("<tr><td class=\"id\">increment</td><td class=\"name\"><input type=\"text\"></td><td class=\"cnName\"><input type=\"text\"></td><td class=\"fullName\"><input type=\"text\"></td><td class=\"summary\"><input type=\"text\"></td><td class=\"clubAmount\"><input type=\"text\" value=\"0\"></td><td class=\"prid\"><input type=\"text\" value=\"0\"></td><td class=\"ctid\"><input type=\"text\" value=\"0\"></td></tr>");
 				$("#add").toggleClass("invisible");
 				$("#confirm,#cancel").toggleClass("invisible");
 			});
 			$("#confirm").click(function() {
-				if ($("tr .name:last input").val().trim() !== "" && $("tr .cnName:last input").val().trim() !== "" && $("tr .collegeAmount:last input").val().trim() !== "" && $("tr .clubAmount:last input").val().trim() !== "" && $("tr .prid:last input").val().trim() !== "") {
+				if ($("tr .name:last input").val().trim() !== "" && $("tr .cnName:last input").val().trim() !== "" && $("tr .fullName:last input").val().trim() !== "" && $("tr .clubAmount:last input").val().trim() !== "" && $("tr .prid:last input").val().trim() !== "" && $("tr .ctid:last input").val().trim() !== "") {
 					saveAndFetchLastData();
 					$("tr :last").addClass("content");
 				}
@@ -50,34 +50,39 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						
 					var a = ($(this).parent().parent().parent());
 					var b = a.html();	// storage a'html, for cancel function
-					var oldName = a.find("td[class='name']").html();
 					
-					a.find("td[class='name']").html("<input type=\"text\" value=\"" + oldName + "\">");
+					a.find("td[class='name']").html("<input type=\"text\" value=\"" + a.find("td[class='name']").html() + "\">");
 					a.find("td[class='cnName']").html("<input type=\"text\" value=\"" + a.find("td[class='cnName']").html() + "\">");
-					a.find("td[class='collegeAmount']").html("<input type=\"text\" value=\"" + a.find("td[class='collegeAmount']").html() + "\">");
+					a.find("td[class='fullName']").html("<input type=\"text\" value=\"" + a.find("td[class='fullName']").html() + "\">");
+					a.find("td[class='summary']").html("<input type=\"text\" value=\"" + a.find("td[class='summary']").html() + "\">");
 					a.find("td[class='clubAmount']").html("<input type=\"text\" value=\"" + a.find("td[class='clubAmount']").html() + "\">");
-					a.find("td[class='prid']").html("<input type=\"text\" value=\"" + a.find("td[class='prid']").html() + "\">");
+					var oldPrid = a.find("td[class='prid']").html();
+					var oldCtid = a.find("td[class='ctid']").html();
+					a.find("td[class='prid']").html("<input type=\"text\" value=\"" + oldPrid + "\">");
+					a.find("td[class='ctid']").html("<input type=\"text\" value=\"" + oldCtid + "\">");
 					
 					a.find("td[class='id']").html("<span class=\"btn\" func=\"update\">update</span><span class=\"btn\" func=\"discard\">discard</span>");
 					
 					$("span[func='update']").click(function() {
-						if ($("tr .name input").val().trim() !== "" && $("tr .cnName input").val().trim() !== "" && $("tr .collegeAmount input").val().trim() !== "" && $("tr .clubAmount input").val().trim() !== "" && $("tr .prid input").val().trim() !== "") {
+						if ($("tr .name input").val().trim() !== "" && $("tr .cnName input").val().trim() !== "" && $("tr .fullName input").val().trim() !== "" && $("tr .clubAmount input").val().trim() !== "" && $("tr .prid input").val().trim() !== "" && $("tr .ctid input").val().trim() !== "") {
 							$.ajax( {
 								type: "POST",
-								url: "updateAndReturnCityData",
-								data: { ctid: a.attr("order"), newName: $("td.name>input").val(), newCnName : $("td.cnName>input").val(), newCollegeAmount : $("td.collegeAmount>input").val(), newClubAmount : $("td.clubAmount>input").val(), newPrid : $("td.prid>input").val(), oldName : oldName },
+								url: "updateAndReturnCollegeData",
+								data: { coid: a.attr("order"), newName: $("td.name>input").val(), newCnName : $("td.cnName>input").val(), newFullName : $("td.fullName>input").val(), newSummary : $("td.summary>input").val(), newClubAmount : $("td.clubAmount>input").val(), newPrid : $("td.prid>input").val(), newCtid : $("td.ctid>input").val(), oldPrid : oldPrid, oldCtid : oldCtid },
 								dataType: "json"
 							}).done(function( json ) {
 								var data = eval("("+json+")");
 								a.find("td[class='id']").html("<div class=\"item\"></div>"+data.id);
 								a.find("td[class='name']").html(data.name);
 								a.find("td[class='cnName']").html(data.cnName);
-								a.find("td[class='collegeAmount']").html(data.collegeAmount);
+								a.find("td[class='fullName']").html(data.fullName);
+								a.find("td[class='summary']").html(data.summary);
 								a.find("td[class='clubAmount']").html(data.clubAmount);
 								a.find("td[class='prid']").html(data.prid);
+								a.find("td[class='ctid']").html(data.ctid);
 								
-							}).fail(function() {
-								alert("FAIL");
+							}).fail(function(XMLHttpRequest, textStatus, errorThrown) {
+								$("body").append(XMLHttpRequest.responseText);
 							}).error(function (XMLHttpRequest, textStatus, errorThrown) {
 								$("#ajax").html(XMLHttpRequest.responseText);
 							});
@@ -97,8 +102,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		function saveAndFetchLastData() {
 			$.ajax( {
 				type: "POST",
-				url: "saveAndFetchLastCity",
-				data: { name: $("tr .name:last input").val(), cnName: $("tr .cnName:last input").val(), collegeAmount: $("tr .collegeAmount:last input").val(), clubAmount: $("tr .clubAmount:last input").val(), prid: $("tr .prid:last input").val() },
+				url: "saveAndFetchLastCollege",
+				data: { name: $("tr .name:last input").val(), cnName: $("tr .cnName:last input").val(), fullName: $("tr .fullName:last input").val(), summary: $("tr .summary:last input").val(), clubAmount: $("tr .clubAmount:last input").val(), ctid: $("tr .ctid:last input").val(), prid: $("tr .prid:last input").val() },
 				dataType: "json"
 			}).done(function( json ) {
 				var data = eval("("+json+")");
@@ -111,9 +116,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				$("tr .id:last").html("<div class=\"item\"></div>" + data.id);
 				$("tr .name:last").html(data.name);
 				$("tr .cnName:last").html(data.cnName);
-				$("tr .collegeAmount:last").html(data.collegeAmount);
+				$("tr .fullName:last").html(data.fullName);
+				$("tr .summary:last").html(data.summary);
 				$("tr .clubAmount:last").html(data.clubAmount);
 				$("tr .prid:last").html(data.prid);
+				$("tr .ctid:last").html(data.ctid);
 				$("tr .more:last").html("<div class=\"btn btn-edit\"></div>");
 			}).fail(function() {
 				alert("FAIL");
@@ -126,25 +133,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-    <h1>город</h1>
+    <h1>college</h1>
     <div id="main" style="width:65%;">
     <table border="1">
     	<tr> 
-			<td width="10%">CTID</td>
-			<td width="30%">Name</td>
-			<td width="30">CHN Name</td>
-			<td width="10%">College Amount</td>
-			<td width="10%">Club Amount</td>
-			<td width="10%">CT PRID</td>
+			<td width="5%">COID</td>
+			<td width="10%">Name</td>
+			<td width="20">CHN Name</td>
+			<td width="20%">Full Name</td>
+			<td width="30%">Summary</td>
+			<td width="5%">Club Amount</td>
+			<td width="5%">CO PRID</td>
+			<td width="5%">CO CTID</td>
 		</tr>
-	<s:iterator value="#request.list" id="city">
-		<tr class="content" order=${city.id}>
-			<td class="id"><div class="item"></div>${city.id}</td>
-			<td class="name">${city.name}</td>
-			<td class="cnName">${city.cnName}</td>
-			<td class="collegeAmount">${city.collegeAmount}</td>
-			<td class="clubAmount">${city.clubAmount}</td>
-			<td class="prid">${city.prid}</td>
+	<s:iterator value="#request.list" id="college">
+		<tr class="content" order=${college.id}>
+			<td class="id"><div class="item"></div>${college.id}</td>
+			<td class="name">${college.name}</td>
+			<td class="cnName">${college.cnName}</td>
+			<td class="fullName">${college.fullName}</td>
+			<td class="summary">${college.summary}</td>
+			<td class="clubAmount">${college.clubAmount}</td>
+			<td class="prid">${college.prid}</td>
+			<td class="ctid">${college.ctid}</td>
 		</tr>
 	</s:iterator>
     </table>

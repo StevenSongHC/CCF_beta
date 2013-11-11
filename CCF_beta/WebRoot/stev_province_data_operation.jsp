@@ -51,8 +51,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						
 					var a = ($(this).parent().parent().parent());
 					var b = a.html();	// storage a'html, for cancel function
+					var oldName = a.find("td[class='name']").html();
 					
-					a.find("td[class='name']").html("<input type=\"text\" value=\"" + a.find("td[class='name']").html() + "\">");
+					a.find("td[class='name']").html("<input type=\"text\" value=\"" + oldName + "\">");
 					a.find("td[class='cnName']").html("<input type=\"text\" value=\"" + a.find("td[class='cnName']").html() + "\">");
 					a.find("td[class='cnShortName']").html("<input type=\"text\" value=\"" + a.find("td[class='cnShortName']").html() + "\">");
 					a.find("td[class='capital']").html("<input type=\"text\" value=\"" + a.find("td[class='capital']").html() + "\">");
@@ -67,7 +68,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							$.ajax( {
 								type: "POST",
 								url: "updateAndReturnProvinceData",
-								data: { prid: a.attr("order"), newName: $("td.name>input").val(), newCnName : $("td.cnName>input").val(), newCnShortName : $("td.cnShortName>input").val(), newCapital : $("td.capital>input").val(), newCityAmount : $("td.cityAmount>input").val(), newBrightness : $("td.brightness>input").val() },
+								data: { prid: a.attr("order"), newName: $("td.name>input").val(), newCnName : $("td.cnName>input").val(), newCnShortName : $("td.cnShortName>input").val(), newCapital : $("td.capital>input").val(), newCityAmount : $("td.cityAmount>input").val(), newBrightness : $("td.brightness>input").val(), oldName: oldName },
 								dataType: "json"
 							}).done(function( json ) {
 							// then refresh the whole line
