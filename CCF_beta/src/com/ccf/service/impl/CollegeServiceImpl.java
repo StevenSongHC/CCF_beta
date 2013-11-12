@@ -41,4 +41,9 @@ public class CollegeServiceImpl implements CollegeService {
 	public void update(College college) {
 		collegeDao.update(college);
 	}
+
+	@Override
+	public void plusClubAmount(int coid, int amount) {
+		collegeDao.plusClubAmount(coid, amount);
+	}
 }

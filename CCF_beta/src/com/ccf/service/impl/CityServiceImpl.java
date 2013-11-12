@@ -40,4 +40,13 @@ public class CityServiceImpl implements CityService {
 	public void update(City city) {
 		cityDao.update(city);
 	}
+	
+	public void plusCollegeAmount(int ctid, int amount) {
+		cityDao.plusCollegeAmount(ctid, amount);
+		
+	}
+	
+	public void plusClubAmount(int ctid, int amount) {
+		cityDao.plusClubAmount(ctid, amount);
+	}
 }

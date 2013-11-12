@@ -15,4 +15,8 @@ public interface CityService {
 	public City getCity(int ctid);
 	
 	public void update(City city);
+	
+	public void plusCollegeAmount(int ctid, int amount);
+	
+	public void plusClubAmount(int ctid, int amount);
 }

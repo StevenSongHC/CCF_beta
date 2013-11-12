@@ -15,4 +15,6 @@ public interface CollegeService {
 	public College getCollege(int coid);
 	
 	public void update(College college);
+	
+	public void plusClubAmount(int coid, int amount);
 }

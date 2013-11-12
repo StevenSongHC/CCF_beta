@@ -11,6 +11,14 @@ import com.ccf.dao.ProvinceDAO;
 
 public class ProvinceDAOImpl extends HibernateDaoSupport implements ProvinceDAO {
 
+	public void runSql(String sql) {
+		System.out.println("sql check:" + sql);
+		Session session = this.getHibernateTemplate().getSessionFactory().openSession();  
+		session.beginTransaction();
+		session.createSQLQuery(sql).executeUpdate();
+		session.getTransaction().commit();
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<Province> list() {
 		return (List<Province>)this.getHibernateTemplate().find("from Province province order by province.id asc");	
@@ -51,6 +59,11 @@ public class ProvinceDAOImpl extends HibernateDaoSupport implements ProvinceDAO 
 		session.beginTransaction();  
 		session.createQuery(hql).executeUpdate(); 
 		session.getTransaction().commit();
+	}
+
+	// update pr_city_amount
+	public void plusCityAmount(int prid, int amount) {
+		runSql("UPDATE province SET pr_city_amount=pr_city_amount+" + amount + " WHERE prid=" + prid);
 	}
 
 }

@@ -202,7 +202,9 @@
 	
 	<!-- ClubAction -->
 	<bean id="addClubAction" class="com.ccf.action.club.AddClubAction" scope="prototype">	
-		<property name="service" ref="clubService" />	
+		<property name="uService" ref="clubService" />
+		<property name="ctService" ref="cityService" />
+		<property name="coService" ref="collegeService" />
 	</bean>
 	
 	<bean id="listClubAction" class="com.ccf.action.club.ListClubAction" scope="prototype">
@@ -269,6 +271,7 @@
 	
 	<bean id="saveAndFetchLastCityAction" class="com.ccf.action.city.AddAndFetchLastDataAction" scope="prototype">
 		<property name="ctService" ref="cityService" />
+		<property name="prService" ref="provinceService" />
 	</bean>
 	
 	<bean id="saveAndFetchLastCollegeAction" class="com.ccf.action.college.AddAndFetchLastDataAction" scope="prototype">

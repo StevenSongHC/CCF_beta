@@ -16,4 +16,6 @@ public interface ProvinceDAO {
 	
 	public void update(Province province);
 	
+	public void plusCityAmount(int prid, int amount);
+	
 }

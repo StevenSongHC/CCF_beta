@@ -115,6 +115,9 @@ public class AddAndFetchLastDataAction extends ActionSupport {
 		else
 			System.out.println("prid or ctid is invalid!");
 		
+		// city.collegeAmount +1
+		ctService.plusCollegeAmount(ctid, 1);
+		
 		// return data
 		data = JSONObject.fromObject(coService.getLastCollege()).toString();
 		

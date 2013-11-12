@@ -10,6 +10,14 @@ import com.ccf.bean.College;
 import com.ccf.dao.CollegeDAO;
 
 public class CollegeDAOImpl extends HibernateDaoSupport implements CollegeDAO {
+	
+	public void runSql(String sql) {
+		System.out.println("sql check:" + sql);
+		Session session = this.getHibernateTemplate().getSessionFactory().openSession();  
+		session.beginTransaction();
+		session.createSQLQuery(sql).executeUpdate();
+		session.getTransaction().commit();
+	}
 
 	@SuppressWarnings("unchecked")
 	public List<College> list() {
@@ -48,6 +56,11 @@ public class CollegeDAOImpl extends HibernateDaoSupport implements CollegeDAO {
 	@Override
 	public void update(College college) {
 		this.getHibernateTemplate().update(college);
+	}
+
+	// update co_club_amount
+	public void plusClubAmount(int coid, int amount) {
+		runSql("UPDATE college SET co_club_amount=co_club_amount+" + amount + " WHERE coid=" + coid);
 	}
 	
 }

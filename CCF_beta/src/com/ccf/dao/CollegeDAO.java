@@ -16,4 +16,6 @@ public interface CollegeDAO {
 	
 	public void update(College college);
 	
+	public void plusClubAmount(int coid, int amount);
+	
 }

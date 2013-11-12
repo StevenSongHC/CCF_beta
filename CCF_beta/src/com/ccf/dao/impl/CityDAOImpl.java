@@ -11,6 +11,14 @@ import com.ccf.dao.CityDAO;
 
 public class CityDAOImpl extends HibernateDaoSupport implements CityDAO {
 
+	public void runSql(String sql) {
+		System.out.println("sql check:" + sql);
+		Session session = this.getHibernateTemplate().getSessionFactory().openSession();  
+		session.beginTransaction();
+		session.createSQLQuery(sql).executeUpdate();
+		session.getTransaction().commit();
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<City> list() {
 		return (List<City>)this.getHibernateTemplate().find("from City city order by city.id asc");	
@@ -50,6 +58,16 @@ public class CityDAOImpl extends HibernateDaoSupport implements CityDAO {
 		session.beginTransaction();  
 		session.createQuery(hql).executeUpdate(); 
 		session.getTransaction().commit();
+	}
+
+	// update ct_college_amount
+	public void plusCollegeAmount(int ctid, int amount) {
+		runSql("UPDATE city SET ct_college_amount=ct_college_amount+" + amount + " WHERE ctid=" + ctid);
+	}
+
+	// update ct_club_amount
+	public void plusClubAmount(int ctid, int amount) {
+		runSql("UPDATE city SET ct_club_amount=ct_club_amount+" + amount + " WHERE ctid=" + ctid);
 	}
 
 }

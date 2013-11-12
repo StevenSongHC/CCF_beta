@@ -36,5 +36,9 @@ public class ProvinceServiceImpl implements ProvinceService {
 	public void update(Province province) {
 		provinceDao.update(province);
 	}
+	
+	public void plusCityAmount(int prid, int amount) {
+		provinceDao.plusCityAmount(prid, amount);
+	}
 
 }

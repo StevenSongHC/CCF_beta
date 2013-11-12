@@ -4,6 +4,7 @@ import net.sf.json.JSONObject;
 
 import com.ccf.bean.City;
 import com.ccf.service.CityService;
+import com.ccf.service.ProvinceService;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class AddAndFetchLastDataAction extends ActionSupport {
@@ -13,6 +14,7 @@ public class AddAndFetchLastDataAction extends ActionSupport {
 	 */
 	private static final long serialVersionUID = 809718818679676622L;
 	private CityService ctService;
+	private ProvinceService prService;
 	private String name;
 	private String cnName;
 	private int collegeAmount;
@@ -24,6 +26,12 @@ public class AddAndFetchLastDataAction extends ActionSupport {
 	}
 	public void setCtService(CityService ctService) {
 		this.ctService = ctService;
+	}
+	public ProvinceService getPrService() {
+		return prService;
+	}
+	public void setPrService(ProvinceService prService) {
+		this.prService = prService;
 	}
 	public String getName() {
 		return name;
@@ -72,6 +80,9 @@ public class AddAndFetchLastDataAction extends ActionSupport {
 		city.setClubAmount(clubAmount);
 		city.setPrid(prid);
 		ctService.add(city);
+		// province.cityAmount +1
+		prService.plusCityAmount(prid, 1);
+		
 		// then return this city data
 		data = JSONObject.fromObject(ctService.getLastCity()).toString();
 		return SUCCESS;
