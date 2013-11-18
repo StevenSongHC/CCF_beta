@@ -24,6 +24,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
     publisher's page!<br>
-    <h1>ALERT!</h1>
+    <h1>NO ALERT!</h1>
   </body>
 </html>
