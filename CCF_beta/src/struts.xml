@@ -62,6 +62,7 @@
 		
 		<action name="enterClub" class="enterClubAction">	
 			<result name="leader">/myclub_leader.jsp</result>
+			<result name="publisher">/myclub_publisher.jsp</result>
 			<result name="member">/myclub_member.jsp</result>
 			<result name="killer" type="redirect">${destination}</result>
 			

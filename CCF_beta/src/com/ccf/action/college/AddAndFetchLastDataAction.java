@@ -95,7 +95,6 @@ public class AddAndFetchLastDataAction extends ActionSupport {
 	}
 	
 	public String execute() throws Exception {
-		System.out.println(name+cnName+fullName+summary+clubAmount+prid+ctid);
 		College college = new College();
 		college.setName(name);
 		college.setCnName(cnName);
