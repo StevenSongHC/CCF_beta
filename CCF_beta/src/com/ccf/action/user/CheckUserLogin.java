@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 import org.apache.struts2.interceptor.SessionAware;
+
 import com.ccf.bean.User;
 import com.ccf.service.UserService;
 import com.opensymphony.xwork2.ActionSupport;

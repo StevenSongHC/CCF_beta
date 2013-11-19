@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.Locale;
+
 import org.apache.struts2.ServletActionContext;
 
 import freemarker.cache.FileTemplateLoader;
