@@ -1,6 +1,7 @@
 package com.ccf.action.user;
 
 import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.interceptor.ServletResponseAware;

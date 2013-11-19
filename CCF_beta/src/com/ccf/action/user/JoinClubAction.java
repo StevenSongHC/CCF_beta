@@ -3,6 +3,7 @@ package com.ccf.action.user;
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
+
 import com.ccf.bean.User;
 import com.ccf.service.UserService;
 import com.opensymphony.xwork2.ActionSupport;
