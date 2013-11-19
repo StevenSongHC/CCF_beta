@@ -66,7 +66,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 			<div class="row2">
 				<div class="activity">
-					a
+					a,got it!
 				</div>
 				<div class="stuff">
 					a
