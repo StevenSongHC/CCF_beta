@@ -37,7 +37,7 @@ public class FileUtil {
 		// change to this: File folder = new File(realPath + "\\" + parent, child);
 		if (!folder.exists()) {
 			try {
-				folder.mkdir();
+				folder.mkdirs();
 			} catch (Exception e) {
 				System.out.println("creating folder failed!");
 				e.printStackTrace();
