@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.ccf.bean.File" table="file" catalog="beta">
+        <id name="id" type="long">
+            <column name="fid" />
+            <generator class="native" />
+        </id>
+        <property name="originName" type="string">
+            <column name="f_origin_name" length="50" not-null="true" />
+        </property>
+        <property name="storageName" type="string">
+            <column name="f_storage_name" length="10" not-null="true" />
+        </property>
+        <property name="date" type="string">
+            <column name="f_date" length="20" />
+        </property>
+        <property name="cid" type="integer">
+            <column name="f_cid" length="4" />
+        </property>
+        <property name="uploaderName" type="string">
+            <column name="f_uploader_name" length="20" />
+        </property>
+        <property name="downloadTimes" type="integer">
+            <column name="f_download_times" length="8" />
+        </property>
+        <property name="limit" type="integer">
+            <column name="f_limit" length="1" />
+        </property>
+    </class>
+    
+</hibernate-mapping>

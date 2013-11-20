@@ -34,6 +34,7 @@
 				<value>Province.hbm.xml</value>
 				<value>City.hbm.xml</value>
 				<value>College.hbm.xml</value>
+				<value>File.hbm.xml</value>
 			</list>
 		</property>		
 		<property name="hibernateProperties">
@@ -88,6 +89,12 @@
 		</property>		
 	</bean>
 	
+	<bean id="fileDao" class="com.ccf.dao.impl.FileDAOImpl" scope="singleton">	<!-- 无状态，仅用于保存前面传过来的数据 -->	
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>		
+	</bean>
+	
 	<bean id="stevDao" class="com.ccf.dao.impl.StevDAOImpl" scope="singleton">	<!-- 无状态，仅用于保存前面传过来的数据 -->	
 		<property name="sessionFactory">
 			<ref bean="sessionFactory"/>
@@ -114,6 +121,10 @@
 	
 	<bean id="collegeService" class="com.ccf.service.impl.CollegeServiceImpl">
 		<property name="collegeDao" ref="collegeDao" />	
+	</bean>
+	
+	<bean id="fileService" class="com.ccf.service.impl.FileServiceImpl">
+		<property name="fileDao" ref="fileDao" />	
 	</bean>
 	
 	<bean id="stevService" class="com.ccf.service.impl.StevServiceImpl"> <!-- scope默认singleton -->	
