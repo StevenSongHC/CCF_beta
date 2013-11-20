@@ -192,6 +192,9 @@
 	<bean id="ajaxCheckNotificationAction" class="com.ccf.action.user.AjaxCheckNotification" scope="prototype">
 		<property name="service" ref="userService" />
 	</bean>
+	<bean id="ajaxLoadStaffListAction" class="com.ccf.action.club.LoadStaffListAction" scope="prototype">
+		<property name="uService" ref="userService" />
+	</bean>
 	<bean id="ajaxLoadUserNameAction" class="com.ccf.action.user.GetUserNameAjaxAction" scope="prototype">
 		<property name="service" ref="userService" />
 	</bean>

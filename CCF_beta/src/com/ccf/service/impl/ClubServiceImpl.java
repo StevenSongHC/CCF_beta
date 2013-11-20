@@ -39,8 +39,8 @@ public class ClubServiceImpl implements ClubService {
 	}
 	
 	public void addMember(int cid, int uid) {
-		System.out.println("addMember ====" + cid + ", " + uid);
-		clubDao.updateCMembers(cid, clubDao.clubMemberUidString(cid) + uid + ",");
+		System.out.println("newMember:" + clubDao.clubMemberUidString(cid)+" + "+uid+",");
+		clubDao.updateCMembers(cid, clubDao.clubMemberUidString(cid)+uid+",");
 	}
 	
 	public void removeMember(int cid, int uid) {
@@ -55,7 +55,8 @@ public class ClubServiceImpl implements ClubService {
 
 	@Override
 	public void addPublisher(int cid, int uid) {
-		clubDao.updateCCodeEditAuthorityMembers(cid, clubDao.clubPublisherUidString(cid) + uid + ",");
+		System.out.println("newPublisher:"+clubDao.clubPublisherUidString(cid)+" + "+uid+",");
+		clubDao.updateCCodeEditAuthorityMembers(cid, clubDao.clubPublisherUidString(cid)+uid+",");
 	}
 
 	@Override

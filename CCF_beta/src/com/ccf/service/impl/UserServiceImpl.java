@@ -67,6 +67,7 @@ public class UserServiceImpl implements UserService {
 			Map<String, Object> info = new HashMap<String, Object>();
 			info.put("username", user.getU_name());
 			info.put("useraccount", user.getU_account());
+			info.put("userpic", user.getU_pic());
 			info.put("uid", user.getUid());
 			usersInfo.add(info);
 		}

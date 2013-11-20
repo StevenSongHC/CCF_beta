@@ -49,7 +49,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				var data = eval("("+json+")");
 				$.each(data, function(index, member) {
 					$("#leader_list").before("<dd><div class=\"default\"><span class=\"username\">" + member.username + "</span><span class=\"link\"><a href=\"profile?account=" + member.useraccount + "\">H</a><a id=\"personelChange\" href=\"personelChange?cid=${clubinfo.cid}&account=" + member.useraccount + "&oldJob=member\">C</a><a href=\"deleteStaff?cid=${clubinfo.cid}&account=" + member.useraccount + "\">D</a></span></div></dd>");
-					$("#leader_list").before("<dd><div class=\"default\"><span class=\"more\"><input type=\"button\" value=\"P\" onclick=\"laodPersonPanel()\" /></span><span class=\"username\"><a href=\"\profile?account=" + member.useraccount + "\">" + member.username + "</a></span></div>");
+					$("#leader_list").before("<dd><div class=\"default\"><span class=\"more\"><input type=\"button\" value=\"P\" onclick=\"loadPersonPanel()\" /></span><span class=\"username\"><a href=\"\profile?account=" + member.useraccount + "\">" + member.username + "</a></span></div>");
 				});
 				$("#member_list").nextUntil("dt").css("display", "none");
 				$("#member_list").nextUntil("dt").toggle("slow");
@@ -74,7 +74,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			$("#publisher_list,#leader_list").css("cursor", "default");
 		};
 		
-		function laodPersonPanel() {
+		function loadPersonPanel() {
 			alert("hello");
 		};
 	</script>	

@@ -195,7 +195,7 @@
 		<action name="personelChange" class="personelChangeAction">
 			<result name="login">/login.jsp</result>
 			<result name="emptyShit">/personel_change.jsp</result>
-			<result name="success" type="redirect">homepage/myclub_${cid}</result>
+			<result name="success" type="redirect">homepage/myclub/${cid}</result>
 		</action>
 		
 		<action name="operateProvince" class="operateProvinceAction">
@@ -227,6 +227,12 @@
 		<action name="ajaxNotification" class="ajaxCheckNotificationAction">
 			<result name="success" type="json">
 				<param name="root">notification</param>
+			</result>
+		</action>
+		
+		<action name="loadStaffList" class="ajaxLoadStaffListAction">
+			<result name="success" type="json">
+				<param name="root">result</param>
 			</result>
 		</action>
 		

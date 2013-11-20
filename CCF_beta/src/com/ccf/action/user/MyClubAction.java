@@ -93,10 +93,16 @@ public class MyClubAction extends ActionSupport implements RequestAware {
 		details.put("college", clubOriginalData.get("college").toString());
 		details.put("tag", clubOriginalData.get("tag").toString());
 		
-		// return publishers' and leader's username instead of uid by default
-		// PS: show members's username by Ajax
-		details.put("publisher", this.userService.findUsersInfoByUids(clubOriginalData.get("publisher").toString()));
+
+		// return staff's uid array
+		// PS: get username by Ajax
+		details.put("leader", clubOriginalData.get("leader").toString());
+		details.put("publisher", clubOriginalData.get("publisher").toString());
+		details.put("member", clubOriginalData.get("member").toString());
+		
+		/*details.put("publisher", this.userService.findUsersInfoByUids(clubOriginalData.get("publisher").toString()));
 		details.put("leader", this.userService.findUsersInfoByUids(clubOriginalData.get("leader").toString()));
+		details.put("member", this.userService.findUsersInfoByUids(clubOriginalData.get("member").toString()));*/
 		
 		System.out.println("Dtails:" + details.toString());
 		
